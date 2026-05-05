@@ -24,7 +24,17 @@ const ArticleSchema = z.object({
     body_markdown: z.string().min(150),
   })).min(5).max(10),
   red_flags_quick_list: z.array(z.string().min(10)).min(5).max(12),
-  faq: z.array(z.object({ q: z.string(), a: z.string() })).min(3).max(6),
+  faq: z.array(
+    z.object({
+      q: z.string().optional(),
+      a: z.string().optional(),
+      question: z.string().optional(),
+      answer: z.string().optional(),
+    }).transform(v => ({
+      q: v.q ?? v.question ?? "",
+      a: v.a ?? v.answer ?? "",
+    })).refine(v => v.q.length > 0 && v.a.length > 0, "FAQ entry needs question + answer")
+  ).min(3).max(6),
   closing: z.string().min(80),
 });
 
@@ -44,7 +54,7 @@ Article structure:
 - intro: 200+ words, hook + stakes (cost of getting fooled, scale of the counterfeit market for this model)
 - sections: 5-10 sections covering specific authentication checks. Each heading is a real check (e.g. "The Cyclops Magnification", "Caseback Engravings", "Bracelet End-Links and Clasp"). body_markdown is detailed prose with specifics.
 - red_flags_quick_list: 5-12 short scannable red flags
-- faq: 3-6 Q&A pairs targeting search-intent questions
+- faq: 3-6 Q&A pairs targeting search-intent questions. Each entry must have keys "q" and "a" (NOT "question"/"answer").
 - closing: 80+ words, final advice + soft mention of getting a second opinion`;
 
 const USER = (brand: string, model: string, refs: string[]) => `Write a complete authentication guide for the ${brand} ${model} (${refs.join(", ")}).
