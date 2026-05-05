@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+}
+
+.prose-watch h2 {
+  @apply font-serif text-2xl md:text-3xl mt-12 mb-4 text-ink;
+}
+.prose-watch h3 {
+  @apply font-serif text-xl mt-8 mb-3 text-ink;
+}
+.prose-watch p {
+  @apply text-base leading-relaxed my-4 text-ink/85;
+}
+.prose-watch ul {
+  @apply list-disc pl-6 my-4 space-y-2 text-ink/85;
+}
+.prose-watch ol {
+  @apply list-decimal pl-6 my-4 space-y-2 text-ink/85;
+}
+.prose-watch a {
+  @apply text-accent underline underline-offset-2 hover:no-underline;
+}
+.prose-watch blockquote {
+  @apply border-l-2 border-accent pl-4 italic text-muted my-6;
+}
+.prose-watch hr {
+  @apply my-10 border-ink/15;
+}
+.prose-watch strong { @apply text-ink; }

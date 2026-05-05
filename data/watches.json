@@ -1,0 +1,22 @@
+[
+  { "slug": "rolex-submariner", "brand": "Rolex", "model": "Submariner", "refs": ["116610LN", "126610LN", "124060"], "priority": 1 },
+  { "slug": "rolex-datejust", "brand": "Rolex", "model": "Datejust", "refs": ["126234", "116234"], "priority": 1 },
+  { "slug": "rolex-daytona", "brand": "Rolex", "model": "Daytona", "refs": ["116500LN", "126500LN"], "priority": 1 },
+  { "slug": "rolex-gmt-master-ii", "brand": "Rolex", "model": "GMT-Master II", "refs": ["126710BLNR", "126710BLRO"], "priority": 1 },
+  { "slug": "rolex-explorer", "brand": "Rolex", "model": "Explorer", "refs": ["124270", "214270"], "priority": 2 },
+  { "slug": "rolex-yachtmaster", "brand": "Rolex", "model": "Yacht-Master", "refs": ["126622", "116622"], "priority": 2 },
+  { "slug": "omega-speedmaster", "brand": "Omega", "model": "Speedmaster Professional", "refs": ["311.30.42.30.01.005", "310.30.42.50.01.001"], "priority": 1 },
+  { "slug": "omega-seamaster-300", "brand": "Omega", "model": "Seamaster Diver 300M", "refs": ["210.30.42.20.03.001"], "priority": 1 },
+  { "slug": "audemars-piguet-royal-oak", "brand": "Audemars Piguet", "model": "Royal Oak", "refs": ["15500ST", "15400ST", "15202ST"], "priority": 1 },
+  { "slug": "patek-nautilus", "brand": "Patek Philippe", "model": "Nautilus", "refs": ["5711/1A", "5712/1A"], "priority": 1 },
+  { "slug": "tudor-black-bay-58", "brand": "Tudor", "model": "Black Bay 58", "refs": ["79030N", "79030B"], "priority": 2 },
+  { "slug": "cartier-santos", "brand": "Cartier", "model": "Santos", "refs": ["WSSA0009", "WSSA0029"], "priority": 2 },
+  { "slug": "cartier-tank", "brand": "Cartier", "model": "Tank", "refs": ["WSTA0029", "WSTA0041"], "priority": 2 },
+  { "slug": "iwc-portugieser", "brand": "IWC", "model": "Portugieser", "refs": ["IW500705", "IW371446"], "priority": 3 },
+  { "slug": "panerai-luminor", "brand": "Panerai", "model": "Luminor", "refs": ["PAM01312", "PAM01000"], "priority": 3 },
+  { "slug": "breitling-navitimer", "brand": "Breitling", "model": "Navitimer", "refs": ["AB0127211B1A1"], "priority": 3 },
+  { "slug": "tag-heuer-monaco", "brand": "TAG Heuer", "model": "Monaco", "refs": ["CBL2113.FC6177"], "priority": 3 },
+  { "slug": "grand-seiko-snowflake", "brand": "Grand Seiko", "model": "Snowflake", "refs": ["SBGA211"], "priority": 3 },
+  { "slug": "vacheron-overseas", "brand": "Vacheron Constantin", "model": "Overseas", "refs": ["4500V/110A-B126"], "priority": 3 },
+  { "slug": "richard-mille-rm-011", "brand": "Richard Mille", "model": "RM 011", "refs": ["RM 011"], "priority": 3 }
+]

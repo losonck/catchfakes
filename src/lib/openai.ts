@@ -1,0 +1,5 @@
+import OpenAI from "openai";
+
+export const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+export const GPT_MODEL = process.env.GPT_MODEL ?? "gpt-4o";
