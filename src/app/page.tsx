@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { listArticles } from "@/lib/content";
-import { WATCHES } from "@/lib/watch-list";
+import { getWatches } from "@/lib/watch-list";
 
 export const dynamic = "force-static";
 
 export default async function HomePage() {
   const articles = await listArticles();
   const published = new Set(articles.map(a => a.slug));
-  const upcoming = WATCHES.filter(w => !published.has(w.slug)).slice(0, 8);
+  const upcoming = getWatches().filter(w => !published.has(w.slug)).slice(0, 8);
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-12">

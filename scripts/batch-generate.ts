@@ -10,7 +10,7 @@ import "dotenv/config";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { spawn } from "node:child_process";
-import { WATCHES } from "../src/lib/watch-list";
+import { getWatches } from "../src/lib/watch-list";
 
 const force = process.argv.includes("--force");
 const priorityArg = process.argv.indexOf("--priority");
@@ -37,7 +37,7 @@ function runGenerate(slug: string): Promise<number> {
 }
 
 async function main() {
-  const queue = WATCHES
+  const queue = getWatches()
     .filter(w => priorityFilter === null || w.priority === priorityFilter)
     .sort((a, b) => a.priority - b.priority);
 

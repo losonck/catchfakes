@@ -1,11 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import matter from "gray-matter";
-import { remark } from "remark";
-import remarkHtml from "remark-html";
-import remarkGfm from "remark-gfm";
+import { marked } from "marked";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
+
+marked.setOptions({ gfm: true, breaks: false });
 
 export interface ArticleFrontmatter {
   slug: string;
@@ -25,6 +24,38 @@ export interface Article {
   raw: string;
 }
 
+const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
+
+function parseFrontmatter(raw: string): { data: Record<string, unknown>; content: string } {
+  const match = raw.match(FRONTMATTER_RE);
+  if (!match) return { data: {}, content: raw };
+
+  const [, head, body] = match;
+  const data: Record<string, unknown> = {};
+
+  for (const line of head.split(/\r?\n/)) {
+    const eq = line.indexOf(":");
+    if (eq === -1) continue;
+    const key = line.slice(0, eq).trim();
+    let val = line.slice(eq + 1).trim();
+    if (!key) continue;
+
+    if (val.startsWith("[") && val.endsWith("]")) {
+      try { data[key] = JSON.parse(val); continue; } catch {}
+    }
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1);
+    }
+    if (/^-?\d+(?:\.\d+)?$/.test(val)) {
+      data[key] = Number(val);
+    } else {
+      data[key] = val;
+    }
+  }
+
+  return { data, content: body };
+}
+
 export async function listSlugs(): Promise<string[]> {
   try {
     const files = await fs.readdir(CONTENT_DIR);
@@ -42,11 +73,11 @@ export async function getArticle(slug: string): Promise<Article | null> {
   } catch {
     return null;
   }
-  const { data, content } = matter(raw);
-  const processed = await remark().use(remarkGfm).use(remarkHtml).process(content);
+  const { data, content } = parseFrontmatter(raw);
+  const html = marked.parse(content) as string;
   return {
-    meta: data as ArticleFrontmatter,
-    html: processed.toString(),
+    meta: data as unknown as ArticleFrontmatter,
+    html,
     raw: content,
   };
 }
