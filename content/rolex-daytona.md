@@ -73,4 +73,4 @@ Authenticating a Rolex Daytona, especially the 116500LN and 126500LN models, req
 
 ---
 
-> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](https://watchauthenticator.app)
+> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](/app)

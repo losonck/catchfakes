@@ -13,7 +13,8 @@ import { openai, GPT_MODEL } from "../src/lib/openai";
 import { findWatch } from "../src/lib/watch-list";
 
 const APP_NAME = process.env.APP_NAME ?? "Watch Authenticator";
-const APP_URL = process.env.APP_URL ?? "https://watchauthenticator.app";
+/** Internal CTA target on catchfakes.com — never hardcode an external URL into article markdown. */
+const APP_PAGE_URL = process.env.APP_PAGE_URL ?? "/app";
 
 const ArticleSchema = z.object({
   title: z.string().min(20).max(80),
@@ -105,7 +106,7 @@ ${a.closing}
 
 ---
 
-> Want a second opinion in seconds? **${APP_NAME}** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](${APP_URL})
+> Want a second opinion in seconds? **${APP_NAME}** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](${APP_PAGE_URL})
 `;
 }
 

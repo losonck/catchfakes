@@ -79,4 +79,4 @@ Authenticating a Rolex Datejust 126234 or 116234 requires a keen eye for detail 
 
 ---
 
-> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](https://watchauthenticator.app)
+> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](/app)

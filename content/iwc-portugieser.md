@@ -63,4 +63,4 @@ Authenticating an IWC Portugieser IW500705 or IW371446 requires attention to det
 
 ---
 
-> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](https://watchauthenticator.app)
+> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](/app)

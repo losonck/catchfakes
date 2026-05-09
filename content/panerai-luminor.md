@@ -69,4 +69,4 @@ Authenticating a Panerai Luminor PAM01312 or PAM01000 requires attention to deta
 
 ---
 
-> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](https://watchauthenticator.app)
+> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](/app)

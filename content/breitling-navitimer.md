@@ -77,4 +77,4 @@ Authenticating a Breitling Navitimer AB0127211B1A1 requires attention to detail 
 
 ---
 
-> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](https://watchauthenticator.app)
+> Want a second opinion in seconds? **Watch Authenticator** scans a photo and runs the same checks — dial, crown, rehaut, caseback, movement — flagging anything off. [Try it →](/app)
