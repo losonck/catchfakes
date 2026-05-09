@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { listArticles } from "@/lib/content";
 
-const SITE_URL = process.env.SITE_URL ?? "https://fakewatch.guide";
+const SITE_URL = process.env.SITE_URL ?? "https://catchfakes.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await listArticles();

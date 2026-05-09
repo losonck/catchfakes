@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const SITE_URL = process.env.SITE_URL ?? "https://fakewatch.guide";
+const SITE_URL = process.env.SITE_URL ?? "https://catchfakes.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Fake Watch Guide — spot counterfeits, expert by reference", template: "%s | Fake Watch Guide" },
-  description: "Reference-by-reference authentication guides for Rolex, Omega, AP, Patek, Tudor and more. Written by watch authenticators, sharpened by AI.",
-  openGraph: { type: "website", siteName: "Fake Watch Guide" },
+  title: { default: "Catch Fakes — authenticate watches by reference", template: "%s | Catch Fakes" },
+  description: "Reference-by-reference authentication guides for Rolex, Omega, AP, Patek, Tudor and more. Spot counterfeits with detail-level checks written by authenticators, sharpened by AI.",
+  openGraph: { type: "website", siteName: "Catch Fakes" },
   alternates: { canonical: "/" },
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="border-b border-ink/10">
           <div className="max-w-3xl mx-auto px-6 py-5 flex items-center justify-between">
             <a href="/" className="font-serif text-xl tracking-tight">
-              Fake Watch <span className="text-accent">Guide</span>
+              Catch <span className="text-accent">Fakes</span>
             </a>
             <nav className="text-sm">
               <a href="/" className="hover:text-accent">All guides</a>
