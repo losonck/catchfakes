@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch Fakes — Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF7F0;
+    --paper-warm: #F2EDE0;
+    --ink: #1A1614;
+    --ink-soft: #4A453F;
+    --rule: #D9D3C2;
+    --oxblood: #6B1E1E;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --max: 1240px;
+    --gutter: clamp(1rem, 4vw, 3rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 100; pointer-events: none;
+    background: radial-gradient(ellipse at top, transparent 60%, rgba(26,22,20,.04));
+    mix-blend-mode: multiply;
+  }
+  /* SVG noise overlay for paper texture */
+  .grain {
+    position: fixed; inset: 0; z-index: 99; pointer-events: none;
+    opacity: .15;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/></svg>");
+  }
+
+  /* Header */
+  header.masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.25rem var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--paper);
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(6px);
+  }
+  .wordmark {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .wordmark em {
+    font-style: italic;
+    color: var(--oxblood);
+  }
+  .meta-bar {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    display: flex; gap: 2rem;
+  }
+
+  /* Hero — editorial spread */
+  .hero {
+    padding: clamp(3rem, 8vw, 7rem) var(--gutter) clamp(3rem, 6vw, 5rem);
+    border-bottom: 1px solid var(--rule);
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 880px) {
+    .hero { grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: end; }
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 2.5rem; height: 1px; background: var(--oxblood);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--oxblood); font-weight: 400; }
+  .hero-lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--oxblood);
+    padding-left: 1.5rem;
+  }
+
+  /* Lead article — the big editorial showcase */
+  .lead-article {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(3rem, 6vw, 5rem) var(--gutter);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  @media (min-width: 880px) {
+    .lead-article { grid-template-columns: 5fr 7fr; gap: 4rem; align-items: center; }
+  }
+  .lead-image {
+    aspect-ratio: 4/5;
+    background:
+      radial-gradient(circle at 30% 30%, #2a2522, #0a0807 70%),
+      #0a0807;
+    position: relative;
+    overflow: hidden;
+  }
+  .lead-image::after {
+    content: 'LEAD ARTICLE PHOTOGRAPH';
+    position: absolute;
+    bottom: 1.5rem; left: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,.3);
+  }
+  .lead-image::before {
+    content: '';
+    position: absolute; inset: 25%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #5a544d, #1c1916 70%);
+    box-shadow: 0 30px 60px rgba(0,0,0,.6);
+  }
+  .lead-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--oxblood);
+    margin-bottom: 1.25rem;
+    display: flex; gap: 1.5rem;
+  }
+  .lead-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+  }
+  .lead-deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+  .byline {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .byline strong { color: var(--ink); }
+
+  /* Article grid */
+  .index {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(3rem, 6vw, 5rem) var(--gutter);
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex; justify-content: space-between; align-items: end;
+  }
+  .section-label .count { color: var(--oxblood); font-weight: 500; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 700px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1080px) {
+    .grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .card {
+    padding: 2rem 1.5rem 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+    gap: 0.75rem;
+    transition: background .25s;
+    cursor: pointer;
+  }
+  .card:hover { background: rgba(107,30,30,.04); }
+  .grid .card:nth-child(3n) { border-right: none; }
+  .card-meta {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+  }
+  .card h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.55rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .card p {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .card .read {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  /* Article preview */
+  .article-preview {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(4rem, 7vw, 6rem) var(--gutter);
+    border-top: 1px solid var(--rule);
+    background: var(--paper-warm);
+  }
+  .article-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    margin-bottom: 1.25rem;
+  }
+  .article-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+  }
+  .article-deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+    max-width: 640px;
+  }
+  .article-body p { margin-bottom: 1.4em; font-size: 1.07rem; line-height: 1.7; color: var(--ink); }
+  .article-body p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-size: 4.5em;
+    line-height: 0.85;
+    float: left;
+    padding: 0.05em 0.12em 0 0;
+    font-weight: 600;
+    color: var(--oxblood);
+  }
+  .article-body h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.9rem;
+    line-height: 1.15;
+    margin: 2.5em 0 0.75em;
+    letter-spacing: -0.01em;
+  }
+  .pullquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.6rem;
+    line-height: 1.35;
+    color: var(--ink);
+    border-top: 2px solid var(--oxblood);
+    border-bottom: 1px solid var(--rule);
+    padding: 2rem 0;
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+  .pullquote::before { content: '“'; color: var(--oxblood); font-size: 1.2em; line-height: 0; vertical-align: -0.4em; padding-right: 0.1em; }
+  .pullquote::after { content: '”'; color: var(--oxblood); font-size: 1.2em; line-height: 0; vertical-align: -0.4em; padding-left: 0.1em; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 3rem var(--gutter);
+    background: var(--paper);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; justify-content: space-between; max-width: var(--max); margin: 0 auto; flex-wrap: wrap; gap: 1rem;
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="masthead">
+  <a href="#" class="wordmark">Catch <em>Fakes</em></a>
+  <div class="meta-bar">
+    <span>VOL. 01 · NO. 24</span>
+    <span>09 MAY 2026</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">A Field Guide for Buyers</div>
+    <h1>Real or <em>fake.</em><br>Know in minutes.</h1>
+  </div>
+  <p class="hero-lede">
+    Reference-by-reference authentication guides written for buyers — what to look at, what to compare, and what every faker still gets wrong.
+  </p>
+</section>
+
+<article class="lead-article">
+  <div class="lead-image"></div>
+  <div>
+    <div class="lead-meta"><span>Lead Story</span><span>Rolex · 116610LN</span></div>
+    <h2 class="lead-title">The Submariner: Six checks that separate the genuine from the convincing</h2>
+    <p class="lead-deck">A reference-grade walkthrough of the dial printing, cyclops magnification, caseback, movement, lume, and bracelet end-links — the points where modern counterfeits still falter.</p>
+    <div class="byline"><strong>Catch Fakes Authentication Desk</strong> · 12 minute read</div>
+  </div>
+</article>
+
+<section class="index">
+  <div class="section-label"><span>Authentication Guides</span><span class="count">20 references</span></div>
+  <div class="grid">
+    <a class="card">
+      <div class="card-meta">Rolex</div>
+      <h3>Datejust 126234</h3>
+      <p>Fluted bezel, jubilee bracelet, and the calibre 3235 movement that fakers rarely replicate convincingly.</p>
+      <div class="read">9 min read</div>
+    </a>
+    <a class="card">
+      <div class="card-meta">Rolex</div>
+      <h3>Daytona 116500LN</h3>
+      <p>Cerachrom bezel, calibre 4130, and the registers spacing that betrays nine out of ten counterfeits.</p>
+      <div class="read">11 min read</div>
+    </a>
+    <a class="card">
+      <div class="card-meta">Omega</div>
+      <h3>Speedmaster Professional</h3>
+      <p>Hesalite vs sapphire, calibre 1861/3861, and the Moon-flown legacy that drives a thriving fake market.</p>
+      <div class="read">10 min read</div>
+    </a>
+    <a class="card">
+      <div class="card-meta">Audemars Piguet</div>
+      <h3>Royal Oak 15500ST</h3>
+      <p>Tapisserie dial guilloché, hand-finished bracelet, and why the bezel screws are diagnostic.</p>
+      <div class="read">13 min read</div>
+    </a>
+    <a class="card">
+      <div class="card-meta">Patek Philippe</div>
+      <h3>Nautilus 5711/1A</h3>
+      <p>The horizontally embossed dial, integrated bracelet tolerances, and a price tag that fuels a parallel industry.</p>
+      <div class="read">14 min read</div>
+    </a>
+    <a class="card">
+      <div class="card-meta">Tudor</div>
+      <h3>Black Bay 58</h3>
+      <p>Snowflake hands, riveted bracelet, and the calibre MT5402 — a modern classic with surprisingly few tells.</p>
+      <div class="read">8 min read</div>
+    </a>
+  </div>
+</section>
+
+<article class="article-preview">
+  <div class="article-eyebrow">Authentication Guide · Rolex Submariner</div>
+  <h1 class="article-title">Spotting a Fake Submariner: 116610LN, 126610LN, 124060</h1>
+  <p class="article-deck">The Submariner is the most counterfeited Rolex in circulation. Here is exactly where modern fakes still betray themselves — even the convincing ones.</p>
+  <div class="article-body">
+    <p>The Rolex Submariner is one of the most iconic and sought-after luxury watches in the world. Its popularity has also made it a prime target for counterfeiters. With the market flooded with fakes, distinguishing a genuine piece from a replica can be daunting — but a handful of details, examined together, will tell you almost everything you need to know.</p>
+    <h2>Dial Printing and Text</h2>
+    <p>The dial of a genuine Rolex Submariner exhibits flawless printing. Text is crisp, with no bleeding or smudging. On the 116610LN and 126610LN, the 'Submariner' text is printed in white; the 124060 wears a simpler, no-date layout. The 'Swiss Made' inscription at six o'clock should be precisely centered with consistent kerning.</p>
+    <div class="pullquote">A counterfeit dial almost always reveals itself under a 10× loupe. The applied indices, the depth of the lacquer, and the alignment of the minute track are diagnostic.</div>
+    <h2>The Cyclops Magnification</h2>
+    <p>The cyclops on a real Rolex magnifies the date by 2.5×. Counterfeit cyclopses rarely achieve this — the date appears smaller, distorted, or sits noticeably off-center. View the watch from a slight angle: a real cyclops projects a clean rectangular magnification; a fake bends and warps at the edges.</p>
+  </div>
+</article>
+
+<footer>
+  <span>Catch Fakes · Independent authentication guides</span>
+  <span>© 2026 · catchfakes.com</span>
+</footer>
+</body>
+</html>

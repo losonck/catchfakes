@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch Fakes — Brand Launch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0B0F;
+    --bg-2: #14141B;
+    --bg-3: #1C1C25;
+    --text: #F0EFE9;
+    --text-soft: #8E8E96;
+    --accent: #D4A95A;
+    --accent-2: #E8C476;
+    --signal: #5DE0E6;
+    --rule: rgba(240,239,233,.08);
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --max: 1280px;
+    --gutter: clamp(1rem, 4vw, 2.5rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  /* Ambient gradients */
+  .ambient {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 40% at 30% 10%, rgba(212,169,90,.10), transparent 70%),
+      radial-gradient(ellipse 80% 50% at 70% 60%, rgba(93,224,230,.06), transparent 70%);
+  }
+
+  /* Header — translucent floating */
+  header.bar {
+    position: sticky; top: 0; z-index: 50;
+    padding: 1rem var(--gutter);
+    background: rgba(11,11,15,.7);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border-bottom: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .wordmark {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .wordmark em { font-style: italic; color: var(--accent); }
+  .nav { display: flex; gap: 2rem; font-size: 0.92rem; }
+  .nav a { color: var(--text-soft); text-decoration: none; transition: color .15s; }
+  .nav a:hover { color: var(--text); }
+  .pill {
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.55rem 1rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform .15s;
+  }
+  .pill:hover { transform: scale(1.04); }
+
+  /* Hero — product launch energy */
+  .hero {
+    position: relative; z-index: 1;
+    padding: clamp(4rem, 10vw, 8rem) var(--gutter) clamp(3rem, 6vw, 5rem);
+    max-width: var(--max);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    background: var(--bg-3);
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    color: var(--text-soft);
+  }
+  .hero-tag .sig { color: var(--signal); font-size: 0.7rem; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(3.2rem, 8vw, 7rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    text-wrap: balance;
+  }
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+    color: var(--text-soft);
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.55;
+  }
+  .hero-cta { display: inline-flex; gap: 1rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 8px 24px rgba(212,169,90,.25);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(212,169,90,.35); }
+  .btn-ghost {
+    color: var(--text-soft);
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 0.95rem 1rem;
+  }
+  .btn-ghost:hover { color: var(--text); }
+  .btn-ghost::after { content: ' →'; }
+
+  /* Hero visual — fake-watch product mockup */
+  .hero-visual {
+    position: relative; z-index: 1;
+    max-width: 1080px;
+    margin: 4rem auto 0;
+    padding: 0 var(--gutter);
+    perspective: 1500px;
+  }
+  .device {
+    position: relative;
+    aspect-ratio: 16/10;
+    transform: rotateX(8deg);
+    transform-origin: 50% 100%;
+    transition: transform .8s cubic-bezier(.2,.8,.2,1);
+  }
+  .device:hover { transform: rotateX(2deg); }
+  .device-frame {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    border: 1px solid rgba(212,169,90,.2);
+    border-radius: 16px;
+    box-shadow:
+      0 60px 120px rgba(0,0,0,.6),
+      inset 0 1px 0 rgba(212,169,90,.15);
+    overflow: hidden;
+  }
+  .device-content {
+    position: absolute; inset: 0;
+    padding: 2rem;
+    display: grid; grid-template-columns: 280px 1fr; gap: 2rem;
+  }
+  .device-side {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .ds-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-soft);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ds-row .ok { color: var(--signal); }
+  .ds-row .warn { color: var(--accent); }
+  .ds-row .fail { color: #FF6464; }
+  .device-main { display: flex; flex-direction: column; gap: 1rem; }
+  .dm-watch {
+    flex: 1;
+    background:
+      radial-gradient(circle at 30% 30%, #4a4438, #14110d 70%),
+      var(--bg);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dm-watch::before {
+    content: '';
+    position: absolute; inset: 25%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #6a604f, #1c1916 70%);
+    box-shadow: 0 30px 60px rgba(0,0,0,.6);
+  }
+  .dm-watch::after {
+    content: '';
+    position: absolute;
+    top: 32%; right: 28%;
+    width: 14%; height: 14%;
+    border: 2px solid var(--signal);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(93,224,230,.5);
+  }
+  .dm-verdict {
+    background: var(--bg);
+    border: 1px solid rgba(93,224,230,.3);
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--signal);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .dm-verdict .score { font-size: 1.5rem; color: var(--text); font-weight: 600; }
+
+  /* Stats strip */
+  .stats {
+    position: relative; z-index: 1;
+    max-width: var(--max);
+    margin: 5rem auto 0;
+    padding: 2rem var(--gutter);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  /* Guides section */
+  .guides {
+    position: relative; z-index: 1;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(4rem, 8vw, 7rem) var(--gutter);
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .section-head h2 em {
+    font-style: italic;
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .section-head p { color: var(--text-soft); max-width: 540px; margin: 0 auto; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .card {
+    background: linear-gradient(180deg, var(--bg-2), var(--bg));
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+    display: flex; flex-direction: column; gap: 0.85rem;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212,169,90,.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 0 1px rgba(212,169,90,.15);
+  }
+  .card-watch-vis {
+    aspect-ratio: 16/10;
+    border-radius: 10px;
+    background:
+      radial-gradient(circle at 50% 60%, rgba(212,169,90,.15), transparent 60%),
+      linear-gradient(135deg, var(--bg-3), var(--bg-2));
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  .card-watch-vis::before {
+    content: '';
+    position: absolute; inset: 25%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #5a544d, #1a1714 70%);
+    box-shadow: 0 12px 28px rgba(0,0,0,.5);
+  }
+  .card-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card h3 {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .card p { font-size: 0.92rem; color: var(--text-soft); line-height: 1.55; }
+  .card-foot {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .card-foot .arrow { color: var(--accent); transition: transform .2s; }
+  .card:hover .card-foot .arrow { transform: translateX(3px); }
+
+  /* Article preview */
+  .article {
+    position: relative; z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(4rem, 7vw, 6rem) var(--gutter);
+    border-top: 1px solid var(--rule);
+  }
+  .a-tag {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .a-title {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .a-title em { font-style: italic; color: var(--accent); }
+  .a-deck {
+    font-size: 1.2rem;
+    color: var(--text-soft);
+    line-height: 1.55;
+    margin-bottom: 3rem;
+  }
+  .a-body p { margin-bottom: 1.4em; line-height: 1.75; font-size: 1.05rem; color: var(--text); }
+  .a-body h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.9rem;
+    margin: 2.5em 0 0.8em;
+    color: var(--text);
+  }
+  .a-body h2 em { font-style: italic; color: var(--accent); }
+  .pull {
+    margin: 2.5rem -1rem;
+    padding: 2rem;
+    background: linear-gradient(180deg, var(--bg-2), var(--bg-3));
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 4rem var(--gutter) 2rem;
+    background: var(--bg-2);
+    position: relative; z-index: 1;
+  }
+  .footer-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: grid; grid-template-columns: 1fr; gap: 2rem;
+  }
+  @media (min-width: 720px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr; } }
+  .foot-brand h4 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .foot-brand h4 em { font-style: italic; color: var(--accent); }
+  .foot-brand p { color: var(--text-soft); font-size: 0.92rem; max-width: 320px; }
+  .foot-col h5 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 1rem;
+  }
+  .foot-col a {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.92rem;
+    margin-bottom: 0.5rem;
+  }
+  .foot-col a:hover { color: var(--accent); }
+  .copyright {
+    border-top: 1px solid var(--rule);
+    margin-top: 3rem; padding-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    text-align: center;
+    max-width: var(--max); margin-left: auto; margin-right: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<header class="bar">
+  <a href="#" class="wordmark">Catch <em>Fakes</em></a>
+  <nav class="nav">
+    <a href="#">Guides</a>
+    <a href="#">App</a>
+    <a href="#">Method</a>
+  </nav>
+  <a href="#" class="pill">Get the App</a>
+</header>
+
+<section class="hero">
+  <div class="hero-tag"><span class="sig">●</span> 20 reference guides live · powered by AI</div>
+  <h1>Authenticate any watch.<br><em>In your pocket.</em></h1>
+  <p class="hero-sub">Reference-grade authentication guides — and a mobile app that runs the same six checks on a photograph in under 60 seconds.</p>
+  <div class="hero-cta">
+    <a href="#" class="btn-primary">Open the catalogue</a>
+    <a href="#" class="btn-ghost">How it works</a>
+  </div>
+</section>
+
+<div class="hero-visual">
+  <div class="device">
+    <div class="device-frame">
+      <div class="device-content">
+        <div class="device-side">
+          <div class="ds-row"><span>DIAL</span><span class="ok">PASS</span></div>
+          <div class="ds-row"><span>CYCLOPS</span><span class="ok">PASS</span></div>
+          <div class="ds-row"><span>CASEBACK</span><span class="ok">PASS</span></div>
+          <div class="ds-row"><span>MOVEMENT</span><span class="warn">CHECK</span></div>
+          <div class="ds-row"><span>LUME</span><span class="ok">PASS</span></div>
+          <div class="ds-row"><span>BRACELET</span><span class="ok">PASS</span></div>
+        </div>
+        <div class="device-main">
+          <div class="dm-watch"></div>
+          <div class="dm-verdict"><span>AUTHENTICITY SCORE</span><span class="score">94<span style="color: var(--text-soft); font-size: 0.7em;">/100</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="stats">
+  <div>
+    <div class="stat-num">20</div>
+    <div class="stat-label">Reference guides</div>
+  </div>
+  <div>
+    <div class="stat-num">12</div>
+    <div class="stat-label">Brands covered</div>
+  </div>
+  <div>
+    <div class="stat-num">6</div>
+    <div class="stat-label">Checks per watch</div>
+  </div>
+  <div>
+    <div class="stat-num">60s</div>
+    <div class="stat-label">Average scan time</div>
+  </div>
+</section>
+
+<section class="guides">
+  <div class="section-head">
+    <h2>Every reference, <em>deconstructed.</em></h2>
+    <p>The dial. The crown. The rehaut. The caseback. The movement. The bracelet. Every point where modern fakes still betray themselves.</p>
+  </div>
+  <div class="grid">
+    <a class="card">
+      <div class="card-watch-vis"></div>
+      <div class="card-tag">Rolex · 116610LN</div>
+      <h3>Submariner</h3>
+      <p>The most counterfeited watch in the world. Six checks catch nine of every ten fakes.</p>
+      <div class="card-foot"><span>11 min</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card">
+      <div class="card-watch-vis"></div>
+      <div class="card-tag">Rolex · 116500LN</div>
+      <h3>Daytona</h3>
+      <p>Cerachrom bezel, calibre 4130, register spacing as the diagnostic tell.</p>
+      <div class="card-foot"><span>13 min</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card">
+      <div class="card-watch-vis"></div>
+      <div class="card-tag">Omega · 311.30.42</div>
+      <h3>Speedmaster Pro</h3>
+      <p>Hesalite vs sapphire, calibre 1861/3861, the Moonwatch legacy.</p>
+      <div class="card-foot"><span>10 min</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card">
+      <div class="card-watch-vis"></div>
+      <div class="card-tag">Audemars Piguet · 15500ST</div>
+      <h3>Royal Oak</h3>
+      <p>Tapisserie guilloché, hand-finished bracelet, bezel screws as diagnostic.</p>
+      <div class="card-foot"><span>13 min</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card">
+      <div class="card-watch-vis"></div>
+      <div class="card-tag">Patek Philippe · 5711/1A</div>
+      <h3>Nautilus</h3>
+      <p>Horizontally embossed dial, integrated bracelet tolerances, parallel industry.</p>
+      <div class="card-foot"><span>14 min</span><span class="arrow">→</span></div>
+    </a>
+    <a class="card">
+      <div class="card-watch-vis"></div>
+      <div class="card-tag">Tudor · 79030N</div>
+      <h3>Black Bay 58</h3>
+      <p>Snowflake hands, riveted bracelet, calibre MT5402 — modern classic.</p>
+      <div class="card-foot"><span>8 min</span><span class="arrow">→</span></div>
+    </a>
+  </div>
+</section>
+
+<article class="article">
+  <div class="a-tag">Authentication Guide · Rolex Submariner</div>
+  <h1 class="a-title">Spot a fake Submariner in <em>six checks.</em></h1>
+  <p class="a-deck">The Submariner is the most counterfeited Rolex in circulation. Modern super-clones have closed the visual gap to the point where photographs no longer reveal them. These are the six checks that still betray them.</p>
+  <div class="a-body">
+    <p>The Rolex Submariner is one of the most iconic luxury watches in the world. It is also the most counterfeited. With the rise of so-called "super-clones" from Guangzhou and Shenzhen, the visual gap between genuine and fake has narrowed dramatically — but a handful of details, examined together, will still tell you almost everything you need to know.</p>
+    <h2><em>1.</em> Dial Printing</h2>
+    <p>Examine the dial under 10× magnification. Genuine Rolex printing is crisp, with no bleeding at the edges of small text. The 'Submariner' wordmark and 'Swiss Made' inscription should be perfectly aligned, with consistent kerning. Counterfeits often show feathering or off-center placement.</p>
+    <div class="pull">A counterfeit dial almost always reveals itself under a 10× loupe. The applied indices, the depth of the lacquer, and the alignment of the minute track are diagnostic.</div>
+    <h2><em>2.</em> Cyclops Magnification</h2>
+    <p>The cyclops on a real Rolex magnifies the date by exactly 2.5×. Counterfeit lenses rarely exceed 1.8×. The date should sit cleanly centered with no warp at the edges of the lens.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div class="foot-brand">
+      <h4>Catch <em>Fakes</em></h4>
+      <p>Reference-grade watch authentication. Built for buyers, sellers, and collectors who can't afford to get it wrong.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Guides</h5>
+      <a href="#">All references</a>
+      <a href="#">By brand</a>
+      <a href="#">Latest</a>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <a href="#">Mobile app</a>
+      <a href="#">Method</a>
+      <a href="#">Pricing</a>
+    </div>
+  </div>
+  <div class="copyright">© 2026 · catchfakes.com — independent watch authentication</div>
+</footer>
+</body>
+</html>

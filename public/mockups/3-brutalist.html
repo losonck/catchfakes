@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch Fakes — Brutalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F2EFE4;
+    --ink: #0A0A0A;
+    --paper: #FFFFFF;
+    --signal: #FFE600;
+    --red: #FF2E2E;
+    --grey: #6E6A60;
+    --display: 'Space Grotesk', system-ui, sans-serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --max: 1440px;
+    --gutter: clamp(1rem, 3vw, 2rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* Header — utilitarian */
+  header.bar {
+    border-bottom: 4px solid var(--ink);
+    padding: 1rem var(--gutter);
+    background: var(--bg);
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--signal);
+    padding: 0.2rem 0.6rem;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+  .nav-bar { display: flex; gap: 2rem; font-family: var(--mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .nav-bar a { color: var(--ink); text-decoration: none; }
+  .nav-bar a:hover { background: var(--signal); padding: 0 0.3rem; }
+
+  /* Hero — text-as-architecture */
+  .hero {
+    padding: clamp(2rem, 5vw, 4rem) var(--gutter) clamp(2rem, 4vw, 3rem);
+    border-bottom: 4px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr 1fr; align-items: end; gap: 2rem; }
+  }
+  .mega {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(5rem, 18vw, 16rem);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .mega .strike { position: relative; }
+  .mega .strike::after {
+    content: ''; position: absolute; left: -2%; right: -2%; top: 48%; height: 0.18em;
+    background: var(--red);
+    transform: rotate(-2deg);
+  }
+  .mega .yel { background: var(--signal); padding: 0 0.05em; }
+  .hero-aside {
+    align-self: end;
+    padding-bottom: 1rem;
+  }
+  .hero-aside .label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1rem;
+  }
+  .hero-aside p {
+    font-family: var(--display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    line-height: 1.25;
+    font-weight: 500;
+    max-width: 32ch;
+  }
+  .ticker {
+    margin-top: 2rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    background: var(--ink); color: var(--bg);
+    padding: 0.5rem 1rem;
+    display: inline-flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+  }
+  .ticker .dot { width: 8px; height: 8px; background: var(--signal); display: inline-block; }
+
+  /* Manifesto strip */
+  .manifesto {
+    padding: clamp(1.5rem, 3vw, 2rem) var(--gutter);
+    background: var(--ink); color: var(--bg);
+    border-bottom: 4px solid var(--ink);
+    font-family: var(--display);
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .manifesto-track {
+    display: inline-flex; gap: 2rem; animation: scroll 30s linear infinite;
+  }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+  .manifesto-track span { color: var(--signal); }
+  .manifesto-track span::before { content: '→ '; }
+
+  /* Index */
+  .index {
+    padding: clamp(2rem, 4vw, 3.5rem) var(--gutter);
+    border-bottom: 4px solid var(--ink);
+  }
+  .index-inner { max-width: var(--max); margin: 0 auto; }
+  .index-head {
+    display: flex; justify-content: space-between; align-items: end;
+    margin-bottom: 2.5rem; gap: 2rem; flex-wrap: wrap;
+  }
+  .index-head h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+  .index-head .count {
+    font-family: var(--mono);
+    font-size: 1rem;
+    background: var(--ink); color: var(--signal);
+    padding: 0.4rem 0.8rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border: 2px solid var(--ink);
+  }
+  @media (min-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1080px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .card {
+    padding: 1.75rem;
+    border-right: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    background: var(--paper);
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    transition: background .15s;
+    cursor: pointer;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .card:hover { background: var(--signal); }
+  .card-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    color: var(--grey);
+  }
+  .card-brand {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .card h3 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.85rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .card p {
+    font-size: 0.9rem;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+  .card .footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--ink);
+  }
+  .card .footer .arrow { font-size: 1.4rem; }
+  .card:hover .footer .arrow { transform: translateX(4px); transition: transform .2s; }
+
+  /* Article preview */
+  .article-preview {
+    padding: clamp(3rem, 5vw, 5rem) var(--gutter);
+    background: var(--paper);
+    border-bottom: 4px solid var(--ink);
+  }
+  .article-inner { max-width: 760px; margin: 0 auto; }
+  .a-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    background: var(--ink); color: var(--signal);
+    padding: 0.3rem 0.6rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+  .a-title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .a-deck {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+    border-left: 6px solid var(--signal);
+    padding-left: 1.25rem;
+  }
+  .a-body p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.4em; }
+  .a-body h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 2.5em 0 0.75em;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 0.4em;
+  }
+  .callout {
+    background: var(--signal);
+    border: 3px solid var(--ink);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+  }
+  .callout span { color: var(--red); }
+
+  footer {
+    padding: 2rem var(--gutter);
+    background: var(--ink); color: var(--bg);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a href="#" class="wordmark">CATCH FAKES</a>
+  <nav class="nav-bar">
+    <a href="#">Guides</a>
+    <a href="#">App</a>
+    <a href="#">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <h1 class="mega">REAL.<br><span class="strike">FAKE.</span><br>KNOW.</h1>
+    </div>
+    <div class="hero-aside">
+      <div class="label">// 20 GUIDES · 12 BRANDS · 0 GUESSWORK</div>
+      <p>Reference-grade authentication for buyers. Every Rolex, Omega, AP — deconstructed to the points where modern fakes still betray themselves.</p>
+      <div class="ticker">
+        <span class="dot"></span> NEW · ROLEX SUBMARINER 116610LN · 11 MIN READ
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="manifesto">
+  <div class="manifesto-track">
+    <span>FAKES ARE GETTING BETTER</span><span>YOUR EYE NEEDS TO MATCH</span><span>WE SHOW YOU EXACTLY WHERE TO LOOK</span><span>FAKES ARE GETTING BETTER</span><span>YOUR EYE NEEDS TO MATCH</span><span>WE SHOW YOU EXACTLY WHERE TO LOOK</span>
+  </div>
+</div>
+
+<section class="index">
+  <div class="index-inner">
+    <div class="index-head">
+      <h2>The<br>Catalog</h2>
+      <span class="count">20 / 20 LIVE</span>
+    </div>
+    <div class="grid">
+      <a class="card">
+        <div class="card-num">001 / 020</div>
+        <div class="card-brand">ROLEX</div>
+        <h3>Submariner</h3>
+        <p>116610LN, 126610LN, 124060. The most counterfeited watch in the world.</p>
+        <div class="footer"><span>11 MIN</span><span class="arrow">→</span></div>
+      </a>
+      <a class="card">
+        <div class="card-num">002 / 020</div>
+        <div class="card-brand">ROLEX</div>
+        <h3>Daytona</h3>
+        <p>116500LN, 126500LN. Cerachrom bezel, calibre 4130, register spacing tells.</p>
+        <div class="footer"><span>13 MIN</span><span class="arrow">→</span></div>
+      </a>
+      <a class="card">
+        <div class="card-num">003 / 020</div>
+        <div class="card-brand">OMEGA</div>
+        <h3>Speedmaster</h3>
+        <p>The Moonwatch. Hesalite vs sapphire, calibre 1861/3861, dial tells.</p>
+        <div class="footer"><span>10 MIN</span><span class="arrow">→</span></div>
+      </a>
+      <a class="card">
+        <div class="card-num">004 / 020</div>
+        <div class="card-brand">AUDEMARS PIGUET</div>
+        <h3>Royal Oak</h3>
+        <p>15500ST, 15400ST, 15202ST. Tapisserie guilloché, hand-finished bracelet.</p>
+        <div class="footer"><span>13 MIN</span><span class="arrow">→</span></div>
+      </a>
+      <a class="card">
+        <div class="card-num">005 / 020</div>
+        <div class="card-brand">PATEK PHILIPPE</div>
+        <h3>Nautilus</h3>
+        <p>5711/1A, 5712/1A. Horizontally embossed dial, integrated bracelet tolerances.</p>
+        <div class="footer"><span>14 MIN</span><span class="arrow">→</span></div>
+      </a>
+      <a class="card">
+        <div class="card-num">006 / 020</div>
+        <div class="card-brand">TUDOR</div>
+        <h3>Black Bay 58</h3>
+        <p>79030N, 79030B. Snowflake hands, calibre MT5402, modern classic.</p>
+        <div class="footer"><span>8 MIN</span><span class="arrow">→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<article class="article-preview">
+  <div class="article-inner">
+    <div class="a-tag">CASE 001 // ROLEX SUBMARINER</div>
+    <h1 class="a-title">Spot a fake Submariner in 6 checks.</h1>
+    <p class="a-deck">The Submariner is the most counterfeited Rolex in circulation. Six checks — examined together — will catch nine out of every ten fakes. Even the convincing ones.</p>
+    <div class="a-body">
+      <p>The Rolex Submariner is one of the most iconic luxury watches in the world. It is also the most counterfeited. With modern "super clones" closing the visual gap to genuine pieces, photographs alone no longer reveal a fake. In-hand inspection is now mandatory — and the six checks below are where you start.</p>
+      <h2>1 — Dial Printing</h2>
+      <p>Examine the dial under 10× magnification. Genuine Rolex printing is crisp, with no bleeding at the edges of small text. The 'Submariner' wordmark and 'Swiss Made' inscription should be perfectly aligned, with consistent kerning. Counterfeits often show feathering or off-center placement.</p>
+      <div class="callout">If three or more of these six checks <span>FAIL</span>, the watch is almost certainly counterfeit.</div>
+      <h2>2 — Cyclops Magnification</h2>
+      <p>The cyclops on a real Rolex magnifies the date by exactly 2.5×. Counterfeit lenses rarely exceed 1.8×. The date should sit cleanly centered with no warp at the edges of the lens.</p>
+    </div>
+  </div>
+</article>
+
+<footer>
+  <span>CATCH FAKES — INDEPENDENT AUTHENTICATION</span>
+  <span>© 2026 — CATCHFAKES.COM</span>
+</footer>
+</body>
+</html>

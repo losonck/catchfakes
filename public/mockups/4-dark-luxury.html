@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch Fakes — Dark Luxury Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0908;
+    --ink-2: #16140F;
+    --ink-3: #1F1C16;
+    --brass: #C9A961;
+    --brass-soft: #8A7544;
+    --paper: #E8E2D5;
+    --paper-soft: #B8B0A0;
+    --rule: #2A2620;
+    --serif: 'Cormorant', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --max: 1280px;
+    --gutter: clamp(1rem, 4vw, 3rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(201,169,97,.04), transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(201,169,97,.03), transparent 60%);
+  }
+  /* Grain */
+  body::after {
+    content: ''; position: fixed; inset: 0; z-index: 99; pointer-events: none;
+    opacity: .08;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* Header */
+  header.bar {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.5rem var(--gutter);
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--ink);
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+  }
+  .wordmark {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.7rem;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+  .wordmark span { color: var(--brass); font-style: italic; font-weight: 400; }
+  .meta-bar {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--paper-soft);
+    display: flex; gap: 2.5rem;
+  }
+  .meta-bar .brass { color: var(--brass); }
+
+  /* Hero — dramatic dossier opener */
+  .hero {
+    padding: clamp(4rem, 10vw, 9rem) var(--gutter) clamp(3rem, 7vw, 6rem);
+    max-width: var(--max);
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .hero-rule {
+    position: absolute;
+    top: 0; left: var(--gutter);
+    width: 1px; bottom: 0;
+    background: linear-gradient(to bottom, transparent, var(--brass) 20%, var(--brass) 80%, transparent);
+    opacity: .4;
+  }
+  .file-stamp {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    position: relative;
+  }
+  .file-stamp::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 1.5rem; height: 1px; background: var(--brass);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(3.5rem, 9vw, 8.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--paper);
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--brass); }
+  .hero-deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--paper-soft);
+    max-width: 640px;
+    padding-left: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  /* Lead dossier card */
+  .lead {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(3rem, 7vw, 6rem) var(--gutter);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  @media (min-width: 880px) { .lead { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; } }
+  .lead-image {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #1a1612 0%, #0a0807 100%);
+    position: relative;
+    border: 1px solid var(--rule);
+  }
+  .lead-image::before {
+    content: ''; position: absolute; inset: 18%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 30%, #5a4a32, #1a1410 70%);
+    box-shadow:
+      0 30px 80px rgba(0,0,0,.7),
+      inset 0 0 60px rgba(0,0,0,.5);
+  }
+  .lead-image::after {
+    content: 'CASE PHOTOGRAPH · DOSSIER LEAD';
+    position: absolute;
+    bottom: 1.5rem; left: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    color: rgba(232,226,213,.3);
+  }
+  .lead-image .corners { position: absolute; inset: 0; pointer-events: none; }
+  .lead-image .corners::before, .lead-image .corners::after {
+    content: ''; position: absolute; width: 24px; height: 24px;
+    border: 1px solid var(--brass);
+  }
+  .lead-image .corners::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+  .lead-image .corners::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+  .lead-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 1.25rem;
+    display: flex; gap: 2rem;
+  }
+  .lead-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .lead-title em { font-style: italic; color: var(--brass); }
+  .lead-deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--paper-soft);
+    margin-bottom: 2rem;
+  }
+  .cta-row { display: flex; gap: 1rem; align-items: center; margin-top: 2rem; }
+  .cta {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    background: var(--brass);
+    padding: 1rem 1.6rem;
+    text-decoration: none;
+    border: none;
+    transition: background .2s;
+  }
+  .cta:hover { background: var(--paper); }
+  .cta-line {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-soft);
+  }
+
+  /* Index — refined catalog */
+  .index {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(3rem, 6vw, 5rem) var(--gutter);
+  }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: end;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--brass-soft);
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.015em;
+  }
+  .section-head .count {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--brass);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .card {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: inherit;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    transition: padding-left .25s;
+    cursor: pointer;
+  }
+  .grid .card:nth-child(2n-1) { padding-right: 2rem; }
+  .grid .card:nth-child(2n) { padding-left: 2rem; border-left: 1px solid var(--rule); }
+  @media (max-width: 699px) { .grid .card { padding-left: 0 !important; padding-right: 0 !important; border-left: none !important; } }
+  .card:hover { padding-left: 1rem; }
+  .grid .card:nth-child(2n):hover { padding-left: 3rem; }
+  .card-num {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--brass);
+    letter-spacing: 0.1em;
+    padding-top: 0.4rem;
+  }
+  .card-meta {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-soft);
+    margin-bottom: 0.5rem;
+  }
+  .card h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.9rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.6rem;
+  }
+  .card h3 em { font-style: italic; color: var(--brass); }
+  .card p {
+    font-size: 0.92rem;
+    color: var(--paper-soft);
+    line-height: 1.55;
+  }
+  .card .read {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-top: 1.25rem;
+  }
+
+  /* Article — dossier file */
+  .dossier {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: clamp(4rem, 8vw, 7rem) var(--gutter);
+    border-top: 1px solid var(--rule);
+  }
+  .dossier-header {
+    border: 1px solid var(--brass-soft);
+    padding: 2rem;
+    margin-bottom: 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+  .field-label {
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 0.4rem;
+  }
+  .field-value { color: var(--paper); font-weight: 500; font-size: 0.9rem; }
+  .a-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+  .a-title em { font-style: italic; color: var(--brass); }
+  .a-deck {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: var(--paper-soft);
+    margin-bottom: 3rem;
+    border-top: 1px solid var(--brass-soft);
+    border-bottom: 1px solid var(--brass-soft);
+    padding: 1.5rem 0;
+  }
+  .a-body p { margin-bottom: 1.5em; font-size: 1.07rem; line-height: 1.75; color: var(--paper); }
+  .a-body p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-size: 4.5em;
+    line-height: 0.85;
+    float: left;
+    padding: 0.05em 0.15em 0 0;
+    color: var(--brass);
+    font-weight: 500;
+  }
+  .a-body h2 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: var(--brass);
+    margin: 2.5em 0 0.75em;
+  }
+  .pullquote {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    line-height: 1.35;
+    color: var(--paper);
+    padding: 2rem 0;
+    margin: 2.5rem 0;
+    text-align: center;
+    border-top: 1px solid var(--brass-soft);
+    border-bottom: 1px solid var(--brass-soft);
+  }
+  .pullquote em { font-style: italic; color: var(--brass); }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 3rem var(--gutter);
+    background: var(--ink-2);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-soft);
+    display: flex; justify-content: space-between; max-width: var(--max); margin: 0 auto; flex-wrap: wrap; gap: 1rem;
+  }
+  footer .brass { color: var(--brass); }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a href="#" class="wordmark">Catch <span>Fakes</span></a>
+  <div class="meta-bar">
+    <span class="brass">DOSSIER 24</span>
+    <span>09.05.2026</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-rule"></div>
+  <div class="file-stamp">Confidential · Authentication Series · Volume I</div>
+  <h1>Real or <em>fake.</em><br>The buyer's <em>dossier.</em></h1>
+  <p class="hero-deck">Reference-grade authentication studies for serious buyers. Twenty references. Every detail of provenance examined — dial, crown, rehaut, caseback, movement, bracelet — the points where modern counterfeits still betray themselves.</p>
+</section>
+
+<article class="lead">
+  <div class="lead-image"><div class="corners"></div></div>
+  <div>
+    <div class="lead-meta"><span>FEATURED CASE</span><span>ROLEX · 116610LN</span></div>
+    <h2 class="lead-title">The Submariner: <em>six</em> details that separate the genuine from the counterfeit.</h2>
+    <p class="lead-deck">The Submariner is the most counterfeited Rolex in circulation. Modern super-clones from Guangzhou have closed the visual gap to the point that photographs no longer reveal them. In-hand examination is now mandatory — and these are the six points where it begins.</p>
+    <div class="cta-row">
+      <a href="#" class="cta">Open Case File</a>
+      <span class="cta-line">12 minute read</span>
+    </div>
+  </div>
+</article>
+
+<section class="index">
+  <div class="section-head">
+    <h2>The Catalog</h2>
+    <span class="count">20 Cases · 12 Brands</span>
+  </div>
+  <div class="grid">
+    <a class="card">
+      <span class="card-num">001</span>
+      <div>
+        <div class="card-meta">Rolex · 126234</div>
+        <h3>Datejust</h3>
+        <p>Fluted bezel, jubilee bracelet, calibre 3235. The classic that fakers know intimately.</p>
+        <div class="read">9 minutes</div>
+      </div>
+    </a>
+    <a class="card">
+      <span class="card-num">002</span>
+      <div>
+        <div class="card-meta">Rolex · 116500LN</div>
+        <h3>Daytona</h3>
+        <p>Cerachrom bezel, calibre 4130. Register spacing betrays nine of ten counterfeits.</p>
+        <div class="read">11 minutes</div>
+      </div>
+    </a>
+    <a class="card">
+      <span class="card-num">003</span>
+      <div>
+        <div class="card-meta">Omega · 311.30.42.30.01.005</div>
+        <h3>Speedmaster <em>Professional</em></h3>
+        <p>Hesalite vs sapphire, calibre 1861/3861, the Moon-flown legacy.</p>
+        <div class="read">10 minutes</div>
+      </div>
+    </a>
+    <a class="card">
+      <span class="card-num">004</span>
+      <div>
+        <div class="card-meta">Audemars Piguet · 15500ST</div>
+        <h3>Royal Oak</h3>
+        <p>Tapisserie guilloché, hand-finished bracelet, the bezel screws as diagnostic.</p>
+        <div class="read">13 minutes</div>
+      </div>
+    </a>
+    <a class="card">
+      <span class="card-num">005</span>
+      <div>
+        <div class="card-meta">Patek Philippe · 5711/1A</div>
+        <h3>Nautilus</h3>
+        <p>Horizontally embossed dial, integrated bracelet tolerances, a parallel industry.</p>
+        <div class="read">14 minutes</div>
+      </div>
+    </a>
+    <a class="card">
+      <span class="card-num">006</span>
+      <div>
+        <div class="card-meta">Tudor · 79030N</div>
+        <h3>Black Bay <em>58</em></h3>
+        <p>Snowflake hands, riveted bracelet, calibre MT5402. A modern classic with few tells.</p>
+        <div class="read">8 minutes</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<article class="dossier">
+  <div class="dossier-header">
+    <div><div class="field-label">Dossier</div><div class="field-value">CF-001</div></div>
+    <div><div class="field-label">Subject</div><div class="field-value">Rolex Submariner</div></div>
+    <div><div class="field-label">References</div><div class="field-value">116610LN · 126610LN · 124060</div></div>
+    <div><div class="field-label">Revised</div><div class="field-value">09.05.2026</div></div>
+  </div>
+  <h1 class="a-title">The Submariner: <em>six</em> checks that catch nine of every ten fakes.</h1>
+  <p class="a-deck">Modern counterfeit Submariners have closed the visual gap to the point where photographs no longer reveal them. Six in-hand checks remain diagnostic. If three or more flag, the watch is almost certainly fake.</p>
+  <div class="a-body">
+    <p>The Rolex Submariner is one of the most iconic luxury watches in the world. Its global recognisability has made it the most counterfeited Rolex in circulation. With the rise of so-called "super-clones" from Guangzhou and Shenzhen, the visual gap between genuine and counterfeit has narrowed dramatically — but a handful of details, examined together, will still tell you almost everything you need to know.</p>
+    <h2>Dial Printing &amp; Text</h2>
+    <p>The dial of a genuine Rolex Submariner exhibits flawless printing. Text is crisp, with no bleeding or smudging. On the 116610LN and 126610LN, the 'Submariner' wordmark is printed in white. The 124060 wears the simpler, no-date layout. The 'Swiss Made' inscription at six o'clock should be precisely centered, with consistent kerning.</p>
+    <div class="pullquote">A counterfeit dial almost always reveals itself under a 10× loupe. The applied indices, the depth of the lacquer, and the alignment of the minute track are <em>diagnostic.</em></div>
+    <h2>The Cyclops Magnification</h2>
+    <p>The cyclops on a real Rolex magnifies the date by 2.5×. Counterfeit cyclopses rarely achieve this — the date appears smaller, distorted, or sits noticeably off-center. View the watch from a slight angle: a real cyclops projects a clean rectangular magnification; a fake bends and warps at the edges of the lens.</p>
+  </div>
+</article>
+
+<footer>
+  <span><span class="brass">CATCH FAKES</span> · INDEPENDENT AUTHENTICATION DOSSIERS</span>
+  <span>© 2026 · CATCHFAKES.COM</span>
+</footer>
+</body>
+</html>

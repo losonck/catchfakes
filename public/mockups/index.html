@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch Fakes — Mockup Comparison</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: ui-sans-serif, system-ui, sans-serif; background: #0F0F12; color: #F0F0F0; padding: 3rem 2rem; line-height: 1.5; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 2.5rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .lead { color: #9A9A9A; font-size: 1.1rem; margin-bottom: 3rem; max-width: 60ch; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+  a.card {
+    display: block;
+    background: #18181E;
+    border: 1px solid #2A2A33;
+    border-radius: 14px;
+    padding: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border .2s, transform .2s;
+  }
+  a.card:hover { border-color: #4A4A5C; transform: translateY(-2px); }
+  .num { display: inline-block; font-family: ui-monospace, monospace; font-size: 0.75rem; color: #5DE0E6; letter-spacing: 0.1em; background: #11252A; padding: 0.2rem 0.55rem; border-radius: 100px; margin-bottom: 0.75rem; }
+  .name { font-size: 1.5rem; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+  .desc { color: #B8B8B8; font-size: 0.95rem; margin-bottom: 1rem; }
+  .meta { font-size: 0.78rem; color: #7A7A88; display: flex; gap: 1rem; flex-wrap: wrap; }
+  .meta span::before { content: '· '; color: #4A4A5C; padding-right: 0.4rem; }
+  .meta span:first-child::before { content: ''; padding: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Catch Fakes — Design Mockups</h1>
+  <p class="lead">Six directions, same content. Open each in a new tab and compare. Recommend viewing on desktop first; all are responsive.</p>
+
+  <div class="grid">
+    <a class="card" href="1-editorial.html" target="_blank">
+      <div class="num">01</div>
+      <div class="name">Editorial</div>
+      <div class="desc">Hodinkee-grounded but sharper. Cormorant serif, oxblood accent, drop caps, marginalia. Safe and credible.</div>
+      <div class="meta"><span>grounded</span><span>warm paper</span><span>serif heavy</span></div>
+    </a>
+    <a class="card" href="2-forensic-lab.html" target="_blank">
+      <div class="num">02</div>
+      <div class="name">Forensic Lab</div>
+      <div class="desc">Case-file aesthetic. Mono type, tick marks, evidence boxes, cyan/red signal colours. On-brand for "Catch Fakes".</div>
+      <div class="meta"><span>distinctive</span><span>technical</span><span>mono heavy</span></div>
+    </a>
+    <a class="card" href="3-brutalist.html" target="_blank">
+      <div class="num">03</div>
+      <div class="name">Brutalist</div>
+      <div class="desc">Anti-design with intent. Massive Space Grotesk, signal yellow, scrolling manifesto strip. Loud, unmistakable.</div>
+      <div class="meta"><span>wildcard</span><span>type-driven</span><span>polarising</span></div>
+    </a>
+    <a class="card" href="4-dark-luxury.html" target="_blank">
+      <div class="num">04</div>
+      <div class="name">Dark Luxury Dossier</div>
+      <div class="desc">Premium black + brass. Cormorant italic display, classified-file framing, generous whitespace. Expensive feel.</div>
+      <div class="meta"><span>grounded</span><span>premium</span><span>dark mode</span></div>
+    </a>
+    <a class="card" href="5-tabloid-expose.html" target="_blank">
+      <div class="num">05</div>
+      <div class="name">Tabloid Exposé</div>
+      <div class="desc">Newsprint front-page energy. Anton condensed, red splash, multi-column body. Built for shareability.</div>
+      <div class="meta"><span>wildcard</span><span>viral</span><span>print-flavoured</span></div>
+    </a>
+    <a class="card" href="6-brand-launch.html" target="_blank">
+      <div class="num">06</div>
+      <div class="name">Brand Launch</div>
+      <div class="desc">Linear/Vercel product polish. Instrument Serif italics, brass gradient, hero device mockup, ambient glow. Treats it as a product, not a blog.</div>
+      <div class="meta"><span>distinctive</span><span>app-bridging</span><span>dark mode</span></div>
+    </a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catch Fakes — Tabloid Exposé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Anton&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F1E8;
+    --newsprint: #ECE7D6;
+    --ink: #0E0E0E;
+    --red: #E20000;
+    --redink: #B30000;
+    --signal: #FFD600;
+    --grey: #6E6A60;
+    --rule: #C9C3B2;
+    --display: 'Anton', 'Archivo Black', sans-serif;
+    --display2: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --max: 1480px;
+    --gutter: clamp(0.75rem, 2.5vw, 2rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    overflow-x: hidden;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/></svg>");
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none;
+    background: rgba(244,241,232,.4);
+    mix-blend-mode: multiply;
+  }
+
+  /* Masthead — newspaper top */
+  .masthead {
+    border-top: 6px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.5rem var(--gutter);
+    background: var(--paper);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .masthead-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .wordmark-box {
+    display: flex; align-items: baseline; gap: 0.5rem;
+  }
+  .wordmark {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .wordmark .red { color: var(--red); }
+  .vol {
+    font-family: var(--display2);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--grey);
+  }
+  .masthead-meta {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    display: flex; gap: 2rem; align-items: center;
+  }
+  .masthead-meta .pulse { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--red); }
+  .masthead-meta .pulse::before { content: '●'; animation: blink 1.5s infinite; }
+  @keyframes blink { 50% { opacity: .3; } }
+
+  /* Hero — front page splash */
+  .splash {
+    border-bottom: 2px solid var(--ink);
+    padding: clamp(1.5rem, 3vw, 2.5rem) var(--gutter) clamp(2rem, 4vw, 3rem);
+    background: var(--paper);
+  }
+  .splash-inner { max-width: var(--max); margin: 0 auto; }
+  .splash-row {
+    display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .badge {
+    background: var(--red); color: var(--paper);
+    padding: 0.4rem 0.7rem;
+  }
+  .badge-yel { background: var(--signal); color: var(--ink); }
+  .badge-out { background: transparent; color: var(--ink); border: 2px solid var(--ink); padding: 0.3rem 0.6rem; }
+  .splash h1 {
+    font-family: var(--display);
+    font-size: clamp(3.5rem, 11vw, 10rem);
+    line-height: 0.85;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+  }
+  .splash h1 .red { color: var(--red); }
+  .splash h1 .yel { background: var(--signal); padding: 0 0.06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .splash-deck {
+    font-family: var(--display2);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    line-height: 1.35;
+    color: var(--ink);
+    max-width: 880px;
+    border-top: 2px solid var(--ink);
+    padding-top: 1.25rem;
+  }
+  .splash-deck .drop {
+    font-family: var(--display);
+    font-style: normal;
+    color: var(--red);
+    font-size: 1.5em;
+    line-height: 0;
+    vertical-align: -0.1em;
+    padding-right: 0.1em;
+  }
+
+  /* Featured strip — three exposés */
+  .featured-strip {
+    border-bottom: 2px solid var(--ink);
+    padding: clamp(1.5rem, 3vw, 2.5rem) var(--gutter);
+    background: var(--newsprint);
+  }
+  .strip-inner {
+    max-width: var(--max); margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 760px) { .strip-inner { grid-template-columns: 1fr 1fr 1fr; } }
+  .feat {
+    padding: 1.5rem;
+    border-right: 1px dashed var(--ink);
+    cursor: pointer;
+  }
+  .strip-inner .feat:last-child { border-right: none; }
+  @media (max-width: 759px) { .feat { border-right: none; border-bottom: 1px dashed var(--ink); } }
+  .feat-tag {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    margin-bottom: 0.5rem;
+  }
+  .feat h3 {
+    font-family: var(--display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+  .feat p { font-size: 0.95rem; line-height: 1.5; color: var(--ink); }
+  .feat .more {
+    margin-top: 0.75rem;
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--red);
+  }
+
+  /* Catalog — newspaper-style index */
+  .catalog {
+    padding: clamp(2rem, 4vw, 3.5rem) var(--gutter);
+    border-bottom: 2px solid var(--ink);
+  }
+  .cat-inner { max-width: var(--max); margin: 0 auto; }
+  .cat-head {
+    border-bottom: 4px double var(--ink);
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1rem;
+  }
+  .cat-head h2 {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .cat-head h2 .red { color: var(--red); }
+  .cat-head .rule-line {
+    font-family: var(--display2);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--grey);
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 700px) { .cat-grid { grid-template-columns: 1fr 1fr; column-gap: 2rem; } }
+  @media (min-width: 1080px) { .cat-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .item {
+    padding: 1.25rem 0;
+    border-bottom: 1px dashed var(--ink);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  .item-num {
+    font-family: var(--display);
+    font-size: 2rem;
+    line-height: 0.85;
+    color: var(--red);
+    min-width: 2ch;
+  }
+  .item h4 {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+  }
+  .item .brand { font-family: var(--sans); font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--grey); margin-bottom: 0.25rem; }
+  .item p { font-size: 0.85rem; color: var(--ink); line-height: 1.45; margin-bottom: 0.5rem; }
+  .item .read { font-family: var(--sans); font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--red); }
+
+  /* Article — exposé layout */
+  .expose {
+    padding: clamp(2.5rem, 5vw, 4.5rem) var(--gutter);
+    background: var(--paper);
+    border-bottom: 2px solid var(--ink);
+  }
+  .expose-inner { max-width: 920px; margin: 0 auto; }
+  .expose-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .expose h1 {
+    font-family: var(--display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    text-wrap: balance;
+  }
+  .expose h1 .red { color: var(--red); }
+  .expose-byline {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--grey);
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--ink);
+  }
+  .expose-byline strong { color: var(--ink); }
+  .expose-deck {
+    font-family: var(--display2);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    line-height: 1.4;
+    margin-bottom: 2.5rem;
+    color: var(--ink);
+  }
+  .expose-body { columns: 1; column-gap: 2rem; }
+  @media (min-width: 760px) { .expose-body { columns: 2; column-gap: 3rem; } }
+  .expose-body p { margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem; break-inside: avoid; }
+  .expose-body p:first-of-type::first-letter {
+    font-family: var(--display);
+    font-size: 4em;
+    line-height: 0.85;
+    float: left;
+    padding: 0.05em 0.1em 0 0;
+    color: var(--red);
+  }
+  .expose-body h2 {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    margin: 1.5em 0 0.5em;
+    color: var(--ink);
+    break-after: avoid;
+  }
+  .red-flag-box {
+    background: var(--ink); color: var(--paper);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    break-inside: avoid;
+  }
+  .red-flag-box h3 {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    margin-bottom: 1rem;
+    color: var(--signal);
+  }
+  .red-flag-box ul { list-style: none; padding: 0; }
+  .red-flag-box li {
+    font-size: 0.92rem; line-height: 1.45; margin-bottom: 0.5rem;
+    padding-left: 1.5rem; position: relative;
+  }
+  .red-flag-box li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+  footer {
+    background: var(--ink); color: var(--paper);
+    padding: 2rem var(--gutter);
+    border-top: 6px solid var(--red);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    display: flex; justify-content: space-between; max-width: var(--max); margin: 0 auto; flex-wrap: wrap; gap: 1rem;
+  }
+  footer .red { color: var(--red); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="wordmark-box">
+      <a href="#" class="wordmark">Catch <span class="red">Fakes</span></a>
+      <span class="vol">— vol. 1, no. 24 —</span>
+    </div>
+    <div class="masthead-meta">
+      <span class="pulse">LIVE · 20 GUIDES</span>
+      <span>SAT · 09 MAY 2026</span>
+    </div>
+  </div>
+</header>
+
+<section class="splash">
+  <div class="splash-inner">
+    <div class="splash-row">
+      <span class="badge">EXPOSÉ</span>
+      <span class="badge-yel">NEW</span>
+      <span class="badge-out">FILED 09.05.26</span>
+    </div>
+    <h1>The <span class="yel">$1.2 Billion</span> Fake-Watch Industry —<br>and the <span class="red">six checks</span> that catch it.</h1>
+    <p class="splash-deck"><span class="drop">T</span>wenty references. Twelve brands. Every detail of the world's most counterfeited timepieces — deconstructed by authenticators, written for buyers, weaponised against fakers.</p>
+  </div>
+</section>
+
+<section class="featured-strip">
+  <div class="strip-inner">
+    <div class="feat">
+      <div class="feat-tag">EXPOSÉ · ROLEX</div>
+      <h3>Submariner Super-Clones Are Here</h3>
+      <p>The new generation of Guangzhou fakes has closed the visual gap. Photographs no longer reveal them. In-hand examination is now mandatory — here is exactly what to look for.</p>
+      <div class="more">READ THE BREAKDOWN →</div>
+    </div>
+    <div class="feat">
+      <div class="feat-tag">CASE FILE · OMEGA</div>
+      <h3>Speedmaster: The Hesalite Tell</h3>
+      <p>The Moonwatch's most diagnostic detail isn't the dial or the caseback — it's the crystal. We show you the three-second test that catches it.</p>
+      <div class="more">READ THE BREAKDOWN →</div>
+    </div>
+    <div class="feat">
+      <div class="feat-tag">EXPOSÉ · PATEK</div>
+      <h3>Why Nautilus Fakes Are Almost Perfect</h3>
+      <p>The 5711 has driven a parallel manufacturing industry. The integration tolerance on the bracelet is now the only consistent tell — measured in tenths of a millimetre.</p>
+      <div class="more">READ THE BREAKDOWN →</div>
+    </div>
+  </div>
+</section>
+
+<section class="catalog">
+  <div class="cat-inner">
+    <div class="cat-head">
+      <h2>The <span class="red">Catalog</span></h2>
+      <span class="rule-line">— 20 references, ranked by counterfeit risk —</span>
+    </div>
+    <div class="cat-grid">
+      <div class="item">
+        <div class="item-num">01</div>
+        <div>
+          <div class="brand">ROLEX · 116610LN</div>
+          <h4>Submariner</h4>
+          <p>The most counterfeited Rolex. Six checks. Forty seconds. Nine of every ten fakes caught.</p>
+          <div class="read">11 MIN · HIGH RISK</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-num">02</div>
+        <div>
+          <div class="brand">ROLEX · 116500LN</div>
+          <h4>Daytona</h4>
+          <p>Cerachrom bezel, calibre 4130. Register spacing is the diagnostic tell.</p>
+          <div class="read">13 MIN · HIGH RISK</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-num">03</div>
+        <div>
+          <div class="brand">OMEGA · 311.30.42.30</div>
+          <h4>Speedmaster Pro</h4>
+          <p>Hesalite vs sapphire, calibre 1861/3861, the Moon-flown legacy.</p>
+          <div class="read">10 MIN · MED RISK</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-num">04</div>
+        <div>
+          <div class="brand">AP · 15500ST</div>
+          <h4>Royal Oak</h4>
+          <p>Tapisserie guilloché. Hand-finished bracelet. Bezel screws as diagnostic.</p>
+          <div class="read">13 MIN · HIGH RISK</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-num">05</div>
+        <div>
+          <div class="brand">PATEK · 5711/1A</div>
+          <h4>Nautilus</h4>
+          <p>The horizontally embossed dial. The integration tolerance. The parallel industry.</p>
+          <div class="read">14 MIN · HIGH RISK</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-num">06</div>
+        <div>
+          <div class="brand">TUDOR · 79030N</div>
+          <h4>Black Bay 58</h4>
+          <p>Snowflake hands, riveted bracelet, calibre MT5402. Few tells, few fakes.</p>
+          <div class="read">8 MIN · LOW RISK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="expose">
+  <div class="expose-inner">
+    <div class="expose-tags">
+      <span class="badge">EXPOSÉ</span>
+      <span class="badge-out">CASE 001</span>
+      <span class="badge-yel">HIGH RISK</span>
+    </div>
+    <h1>The Submariner: <span class="red">six</span> checks that catch nine of every ten fakes.</h1>
+    <div class="expose-byline">By <strong>The Catch Fakes Authentication Desk</strong> · Filed 09.05.2026 · 11 minute read</div>
+    <p class="expose-deck">The Submariner is the most counterfeited Rolex in circulation. Modern super-clones from Guangzhou have closed the visual gap to the point that photographs no longer reveal them. These are the six checks that still betray them.</p>
+    <div class="expose-body">
+      <p>The Rolex Submariner is one of the most iconic luxury watches in the world. It is also, by some distance, the most counterfeited. With the rise of so-called "super-clones" from Guangzhou and Shenzhen, the visual gap between genuine and fake has narrowed dramatically — but a handful of details, examined together, will still tell you almost everything you need to know.</p>
+      <h2>1 — Dial Printing</h2>
+      <p>Examine the dial under 10× magnification. Genuine Rolex printing is crisp, with no bleeding at the edges of small text. The 'Submariner' wordmark and 'Swiss Made' inscription should be perfectly aligned, with consistent kerning. Counterfeits often show feathering or off-center placement — and almost always fail at the printing depth around the applied indices.</p>
+      <div class="red-flag-box">
+        <h3>RED FLAGS — IMMEDIATE FAIL</h3>
+        <ul>
+          <li>Caseback engravings of any kind (Rolex stopped this in the early '90s)</li>
+          <li>Cyclops magnifying less than 2× — measurable by eye</li>
+          <li>Bezel that turns smoothly without the 120 distinct clicks</li>
+          <li>Lume that glows green rather than blue</li>
+          <li>Bracelet end-links that show daylight against the case</li>
+        </ul>
+      </div>
+      <h2>2 — Cyclops</h2>
+      <p>The cyclops on a real Rolex magnifies the date by exactly 2.5×. Counterfeit lenses rarely exceed 1.8×. The date should sit cleanly centered with no warp at the edges — a real cyclops projects a clean rectangular magnification, a fake bends and warps.</p>
+      <h2>3 — Caseback</h2>
+      <p>Rolex Submariner casebacks are smooth, solid stainless steel. No engravings, no logos, no model text. If you see anything engraved on the caseback, it is counterfeit — full stop.</p>
+    </div>
+  </div>
+</article>
+
+<footer>
+  <span><span class="red">CATCH FAKES</span> — INDEPENDENT WATCH AUTHENTICATION</span>
+  <span>© 2026 — CATCHFAKES.COM</span>
+</footer>
+</body>
+</html>
