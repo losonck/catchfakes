@@ -18,5 +18,26 @@
   { "slug": "tag-heuer-monaco", "brand": "TAG Heuer", "model": "Monaco", "refs": ["CBL2113.FC6177"], "priority": 3 },
   { "slug": "grand-seiko-snowflake", "brand": "Grand Seiko", "model": "Snowflake", "refs": ["SBGA211"], "priority": 3 },
   { "slug": "vacheron-overseas", "brand": "Vacheron Constantin", "model": "Overseas", "refs": ["4500V/110A-B126"], "priority": 3 },
-  { "slug": "richard-mille-rm-011", "brand": "Richard Mille", "model": "RM 011", "refs": ["RM 011"], "priority": 3 }
+  { "slug": "richard-mille-rm-011", "brand": "Richard Mille", "model": "RM 011", "refs": ["RM 011"], "priority": 3 },
+
+  { "slug": "rolex-submariner-vintage", "brand": "Rolex", "model": "Submariner (Vintage)", "refs": ["1680", "5512", "5513"], "priority": 1 },
+  { "slug": "rolex-sea-dweller", "brand": "Rolex", "model": "Sea-Dweller", "refs": ["126600", "116600", "16600"], "priority": 1 },
+  { "slug": "rolex-sky-dweller", "brand": "Rolex", "model": "Sky-Dweller", "refs": ["336934", "326934"], "priority": 2 },
+  { "slug": "rolex-air-king", "brand": "Rolex", "model": "Air-King", "refs": ["126900", "116900"], "priority": 3 },
+  { "slug": "omega-speedmaster-pre-moon", "brand": "Omega", "model": "Speedmaster (Pre-Moon)", "refs": ["105.012-65", "145.012-67", "ST 105.012"], "priority": 1 },
+  { "slug": "omega-aqua-terra", "brand": "Omega", "model": "Seamaster Aqua Terra", "refs": ["220.10.41.21.03.001"], "priority": 2 },
+  { "slug": "omega-constellation", "brand": "Omega", "model": "Constellation", "refs": ["131.23.39.20.02.002"], "priority": 3 },
+  { "slug": "patek-aquanaut", "brand": "Patek Philippe", "model": "Aquanaut", "refs": ["5167A", "5968A"], "priority": 1 },
+  { "slug": "patek-calatrava", "brand": "Patek Philippe", "model": "Calatrava", "refs": ["5196G", "5227G"], "priority": 3 },
+  { "slug": "ap-royal-oak-offshore", "brand": "Audemars Piguet", "model": "Royal Oak Offshore", "refs": ["26470ST", "15710ST"], "priority": 2 },
+  { "slug": "ap-code-1159", "brand": "Audemars Piguet", "model": "Code 11.59", "refs": ["15210ST", "26393CR"], "priority": 3 },
+  { "slug": "vacheron-222", "brand": "Vacheron Constantin", "model": "Historiques 222", "refs": ["4200H/222J-B935"], "priority": 2 },
+  { "slug": "tudor-pelagos", "brand": "Tudor", "model": "Pelagos", "refs": ["25600TN", "25600TB", "25407N"], "priority": 2 },
+  { "slug": "tudor-black-bay-pro", "brand": "Tudor", "model": "Black Bay Pro", "refs": ["79470"], "priority": 3 },
+  { "slug": "cartier-ballon-bleu", "brand": "Cartier", "model": "Ballon Bleu", "refs": ["W6920071", "WJBB0042"], "priority": 3 },
+  { "slug": "jlc-reverso", "brand": "Jaeger-LeCoultre", "model": "Reverso Classic / Tribute", "refs": ["Q3958520", "Q397848J"], "priority": 2 },
+  { "slug": "heuer-carrera-vintage", "brand": "Heuer / TAG Heuer", "model": "Carrera (Vintage)", "refs": ["1158CH", "2447S"], "priority": 2 },
+  { "slug": "zenith-el-primero", "brand": "Zenith", "model": "El Primero / Chronomaster", "refs": ["03.3300.3604", "03.2150.400"], "priority": 3 },
+  { "slug": "hublot-big-bang", "brand": "Hublot", "model": "Big Bang", "refs": ["411.NX.1170.RX", "301.SX.130.RX"], "priority": 3 },
+  { "slug": "bell-ross-br-03", "brand": "Bell & Ross", "model": "BR 03", "refs": ["BR03-92", "BR0392-BL-CE"], "priority": 3 }
 ]

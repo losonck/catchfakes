@@ -39,11 +39,13 @@ export async function generateMetadata(
         "watch authentication",
         `fake ${article.meta.brand}`,
       ],
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: article.meta.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: article.meta.title,
       description: article.meta.description,
+      images: ["/og.jpg"],
     },
     keywords: [
       `fake ${article.meta.brand} ${article.meta.model}`,
