@@ -3,6 +3,8 @@ import { listArticles } from "@/lib/content";
 
 const SITE_URL = process.env.SITE_URL ?? "https://catchfakes.com";
 
+export const dynamic = "force-static";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await listArticles();
   return [
