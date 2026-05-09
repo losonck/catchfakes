@@ -8,8 +8,13 @@ export const SITE_DESCRIPTION =
   "Reference-grade watch authentication guides. Real or fake — six checks per reference, written by authenticators for buyers.";
 /** Internal landing page on catchfakes.com that introduces the app and links to the store. */
 export const APP_PAGE_URL = process.env.APP_PAGE_URL ?? "/app";
-/** External app store URL (Google Play). Used by Organization schema and llms.txt. */
-export const APP_STORE_URL = process.env.APP_STORE_URL ?? "https://play.google.com/store/apps/details?id=com.watchauthenticator.app";
+/** External app store URLs. NEXT_PUBLIC_ prefix so client components can read them. */
+export const APP_STORE_URL_ANDROID =
+  process.env.NEXT_PUBLIC_APP_STORE_URL_ANDROID ??
+  "https://play.google.com/store/apps/details?id=com.watchauthenticator.app";
+export const APP_STORE_URL_IOS = process.env.NEXT_PUBLIC_APP_STORE_URL_IOS ?? "";
+/** Backwards-compat alias used by Organization schema sameAs. */
+export const APP_STORE_URL = APP_STORE_URL_ANDROID;
 export const APP_NAME = process.env.APP_NAME ?? "Watch Authenticator";
 
 export interface ArticleMeta {
@@ -31,7 +36,7 @@ export const orgSchema = () => ({
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
-  sameAs: [APP_STORE_URL],
+  sameAs: [APP_STORE_URL_ANDROID, APP_STORE_URL_IOS].filter(Boolean),
 });
 
 export const websiteSchema = () => ({

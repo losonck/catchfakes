@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, APP_PAGE_URL, orgSchema, websiteSchema, renderJsonLd } from "@/lib/seo";
+import { AppStoreButton } from "@/components/AppStoreButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -78,12 +79,7 @@ function Header() {
           <a href={APP_PAGE_URL} className="hover:text-text transition-colors">App</a>
           <a href="/about" className="hover:text-text transition-colors">Method</a>
         </nav>
-        <a
-          href={APP_PAGE_URL}
-          className="bg-accent-gradient text-ink font-semibold text-sm px-4 py-2 rounded-full hover:scale-105 transition-transform"
-        >
-          Get the App
-        </a>
+        <AppStoreButton variant="pill" desktopToLanding={true} />
       </div>
     </header>
   );

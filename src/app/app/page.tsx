@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { APP_NAME, APP_STORE_URL, SITE_NAME, SITE_URL, renderJsonLd } from "@/lib/seo";
+import { APP_NAME, APP_STORE_URL_ANDROID, APP_STORE_URL_IOS, SITE_NAME, SITE_URL, renderJsonLd } from "@/lib/seo";
+import { AppStoreButton } from "@/components/AppStoreButton";
 
 export const dynamic = "force-static";
 
@@ -27,7 +28,8 @@ const softwareSchema = {
   description: PAGE_DESC,
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Android",
-  url: APP_STORE_URL,
+  url: APP_STORE_URL_ANDROID,
+  sameAs: [APP_STORE_URL_ANDROID, APP_STORE_URL_IOS].filter(Boolean),
   offers: {
     "@type": "Offer",
     price: "0",
@@ -65,15 +67,27 @@ export default function AppPage() {
           The same authentication method used in every <Link href="/" className="text-accent underline-offset-4 hover:underline">Catch Fakes guide</Link> — automated, in your pocket, on a photograph.
         </p>
         <div className="inline-flex flex-wrap gap-4 items-center justify-center">
+          <AppStoreButton variant="primary" desktopToLanding={false} />
           <a
-            href={APP_STORE_URL}
+            href={APP_STORE_URL_ANDROID}
             target="_blank"
             rel="noopener"
-            className="bg-accent-gradient text-ink font-semibold px-6 py-3.5 rounded-full shadow-glow hover:shadow-glow-strong hover:-translate-y-0.5 transition-all"
+            className="text-text-soft hover:text-text text-sm underline-offset-4 hover:underline"
           >
-            Get on Google Play →
+            Google Play
           </a>
-          <span className="text-text-soft text-sm">iOS coming soon</span>
+          {APP_STORE_URL_IOS ? (
+            <a
+              href={APP_STORE_URL_IOS}
+              target="_blank"
+              rel="noopener"
+              className="text-text-soft hover:text-text text-sm underline-offset-4 hover:underline"
+            >
+              App Store
+            </a>
+          ) : (
+            <span className="text-text-soft text-sm">iOS coming soon</span>
+          )}
         </div>
       </section>
 
@@ -158,15 +172,10 @@ export default function AppPage() {
           <p className="text-text-soft max-w-[480px] mx-auto mb-8">
             Free to download. In-app purchases unlock full authentication reports for any reference.
           </p>
-          <a
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener"
-            className="inline-flex bg-accent-gradient text-ink font-semibold px-7 py-4 rounded-full shadow-glow hover:shadow-glow-strong hover:-translate-y-0.5 transition-all"
-          >
-            Get on Google Play →
-          </a>
-          <div className="mt-4 text-text-soft text-xs font-mono tracking-wider">iOS coming soon</div>
+          <AppStoreButton variant="primary" desktopToLanding={false} className="px-7 py-4" />
+          {!APP_STORE_URL_IOS && (
+            <div className="mt-4 text-text-soft text-xs font-mono tracking-wider">iOS coming soon</div>
+          )}
         </div>
       </section>
     </>
