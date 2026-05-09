@@ -3,31 +3,80 @@
 @tailwind utilities;
 
 @layer base {
-  html { -webkit-font-smoothing: antialiased; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { background: theme('colors.bg'); color: theme('colors.text'); }
 }
 
-.prose-watch h2 {
-  @apply font-serif text-2xl md:text-3xl mt-12 mb-4 text-ink;
+/* Ambient background — fixed radial glows */
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 10%, rgba(212,169,90,.10), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 70% 60%, rgba(93,224,230,.06), transparent 70%);
 }
-.prose-watch h3 {
-  @apply font-serif text-xl mt-8 mb-3 text-ink;
+
+/* Article prose styles for dark theme */
+.prose-article { color: theme('colors.text'); max-width: theme('maxWidth.prose'); }
+.prose-article h2 {
+  font-family: theme('fontFamily.serif');
+  font-weight: 400;
+  font-size: 1.9rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 2.5em 0 0.8em;
+  color: theme('colors.text');
 }
-.prose-watch p {
-  @apply text-base leading-relaxed my-4 text-ink/85;
+.prose-article h2 em { font-style: italic; color: theme('colors.accent'); }
+.prose-article h3 {
+  font-family: theme('fontFamily.serif');
+  font-weight: 400;
+  font-size: 1.45rem;
+  line-height: 1.2;
+  margin: 2em 0 0.5em;
+  color: theme('colors.text');
 }
-.prose-watch ul {
-  @apply list-disc pl-6 my-4 space-y-2 text-ink/85;
+.prose-article p {
+  font-size: 1.07rem;
+  line-height: 1.75;
+  color: theme('colors.text');
+  margin-bottom: 1.4em;
 }
-.prose-watch ol {
-  @apply list-decimal pl-6 my-4 space-y-2 text-ink/85;
+.prose-article ul, .prose-article ol {
+  margin: 1.5em 0;
+  padding-left: 1.5rem;
+  color: theme('colors.text');
 }
-.prose-watch a {
-  @apply text-accent underline underline-offset-2 hover:no-underline;
+.prose-article li { margin-bottom: 0.5em; line-height: 1.65; }
+.prose-article a {
+  color: theme('colors.accent');
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }
-.prose-watch blockquote {
-  @apply border-l-2 border-accent pl-4 italic text-muted my-6;
+.prose-article a:hover { color: theme('colors.accent-2'); }
+.prose-article strong { color: theme('colors.text'); font-weight: 600; }
+.prose-article blockquote {
+  margin: 2.5rem -1rem;
+  padding: 1.75rem 1.5rem;
+  background: linear-gradient(180deg, theme('colors.bg-2'), theme('colors.bg-3'));
+  border-left: 3px solid theme('colors.accent');
+  border-radius: 8px;
+  font-family: theme('fontFamily.serif');
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: theme('colors.text');
 }
-.prose-watch hr {
-  @apply my-10 border-ink/15;
+.prose-article hr {
+  margin: 3rem 0;
+  border: none;
+  border-top: 1px solid theme('colors.rule');
 }
-.prose-watch strong { @apply text-ink; }
+.prose-article code {
+  font-family: theme('fontFamily.mono');
+  font-size: 0.92em;
+  background: theme('colors.bg-2');
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+  color: theme('colors.signal');
+}
+.prose-article > :first-child { margin-top: 0; }

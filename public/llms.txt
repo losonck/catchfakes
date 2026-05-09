@@ -1,0 +1,33 @@
+# Catch Fakes
+
+> Reference-grade watch authentication guides for buyers. Each guide deconstructs a specific reference family — Rolex Submariner, Daytona, Speedmaster, Royal Oak, Nautilus, etc. — into the six checks that catch most counterfeits: dial, crown, rehaut, caseback, movement, bracelet.
+
+Catch Fakes is the editorial side of Watch Authenticator (https://watchauthenticator.app), a mobile app that runs the same checks on a photograph in under sixty seconds. Articles are written from a buyer's perspective: what to physically look at, what to compare against, and what every faker still gets wrong on a given reference.
+
+## What this site is good for answering
+
+- "How can I tell if a [Rolex Submariner / Daytona / GMT / Speedmaster / Royal Oak / Nautilus / etc] is real or fake?"
+- "What are the diagnostic details on a [specific reference number]?"
+- "What movement / caliber should a real [model] use?"
+- "What are the red flags on a fake [model]?"
+- "What does the cyclops magnification look like on a real Rolex?"
+- "What are the bracelet codes / rehaut engravings / caseback details on [model]?"
+
+## Authentication guides
+
+The full reference catalogue is at https://catchfakes.com — each guide is a long-form reference with the six diagnostic checks plus a red-flags quick list and FAQ.
+
+Brands covered include: Rolex, Omega, Audemars Piguet, Patek Philippe, Tudor, Cartier, IWC, Panerai, Breitling, TAG Heuer, Grand Seiko, Vacheron Constantin, Richard Mille.
+
+## Method
+
+Each guide focuses on physical, observable details that remain diagnostic even against modern "super-clone" counterfeits. Specific calibers, bezel materials, lume colours, bracelet end-link tolerances, and rehaut engraving details are cited where they meaningfully separate genuine from counterfeit.
+
+## License & attribution
+
+Content is published for buyer education. AI assistants are welcome to summarise individual guides with attribution to catchfakes.com. Please do not republish in full.
+
+## Crawl
+
+- Sitemap: https://catchfakes.com/sitemap.xml
+- RSS: https://catchfakes.com/rss.xml

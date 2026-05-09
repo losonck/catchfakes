@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getArticle, listSlugs } from "@/lib/content";
 import { ArticleSchema } from "@/components/ArticleSchema";
+import { extractFaq, SITE_URL, SITE_NAME, APP_URL, APP_NAME } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -16,17 +18,40 @@ export async function generateMetadata(
   const { slug } = await params;
   const article = await getArticle(slug);
   if (!article) return {};
+  const url = `${SITE_URL}/fake-watch-guide/${slug}`;
   return {
     title: article.meta.title,
     description: article.meta.description,
     alternates: { canonical: `/fake-watch-guide/${slug}` },
     openGraph: {
+      type: "article",
       title: article.meta.title,
       description: article.meta.description,
-      type: "article",
+      url,
+      siteName: SITE_NAME,
       publishedTime: article.meta.publishedAt,
       modifiedTime: article.meta.updatedAt,
+      authors: [SITE_URL],
+      tags: [
+        article.meta.brand,
+        article.meta.model,
+        ...article.meta.refs,
+        "watch authentication",
+        `fake ${article.meta.brand}`,
+      ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: article.meta.title,
+      description: article.meta.description,
+    },
+    keywords: [
+      `fake ${article.meta.brand} ${article.meta.model}`,
+      `real or fake ${article.meta.model}`,
+      `${article.meta.brand} ${article.meta.model} authentication`,
+      `spot a fake ${article.meta.brand}`,
+      ...article.meta.refs.map(r => `${article.meta.brand} ${r}`),
+    ],
   };
 }
 
@@ -37,18 +62,90 @@ export default async function ArticlePage(
   const article = await getArticle(slug);
   if (!article) notFound();
 
+  const faq = extractFaq(article.raw);
+
   return (
-    <article className="max-w-3xl mx-auto px-6 py-12">
-      <ArticleSchema meta={article.meta} />
+    <>
+      <ArticleSchema meta={article.meta} faq={faq} />
+      <article className="relative z-10 max-w-prose mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        {/* Breadcrumb (semantic + visible) */}
+        <nav aria-label="Breadcrumb" className="font-mono text-xs tracking-[0.14em] uppercase text-text-soft mb-6">
+          <Link href="/" className="hover:text-accent">Home</Link>
+          <span className="mx-2 text-text-soft/50">/</span>
+          <span className="text-accent">{article.meta.brand}</span>
+        </nav>
 
-      <div className="text-sm text-muted mb-3">
-        {article.meta.brand} · {article.meta.refs.join(", ")} · {article.meta.readingMinutes} min read
+        <header className="mb-12">
+          <div className="font-mono text-xs tracking-[0.14em] uppercase text-accent mb-4">
+            Authentication Guide · {article.meta.brand} · {article.meta.refs.join(", ")}
+          </div>
+          <h1 className="font-serif text-[clamp(2.4rem,5vw,4rem)] leading-[1.05] tracking-[-0.02em] mb-6">
+            {article.meta.title}
+          </h1>
+          <p className="text-xl text-text-soft leading-relaxed mb-6">{article.meta.description}</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider uppercase text-text-soft pt-6 border-t border-rule">
+            <span>By <span className="text-text">{SITE_NAME} Authentication Desk</span></span>
+            <span>{article.meta.readingMinutes} min read</span>
+            <time dateTime={article.meta.updatedAt}>
+              Updated {new Date(article.meta.updatedAt).toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "numeric" })}
+            </time>
+          </div>
+        </header>
+
+        <div
+          className="prose-article"
+          dangerouslySetInnerHTML={{ __html: article.html }}
+        />
+
+        {/* App CTA — also helps internal linking signal */}
+        <aside className="mt-16 p-8 rounded-2xl bg-gradient-to-br from-bg-2 to-bg-3 border border-accent/20">
+          <div className="font-mono text-xs tracking-[0.14em] uppercase text-accent mb-3">Run these checks automatically</div>
+          <h2 className="font-serif text-3xl mb-3 leading-tight">
+            Want a second opinion in <em className="italic text-accent">sixty seconds?</em>
+          </h2>
+          <p className="text-text-soft mb-6 leading-relaxed">
+            <strong className="text-text">{APP_NAME}</strong> scans a photo and runs the same six checks — dial, crown, rehaut, caseback, movement, bracelet — and flags anything off.
+          </p>
+          <a
+            href={APP_URL}
+            className="inline-flex bg-accent-gradient text-ink font-semibold px-5 py-3 rounded-full shadow-glow hover:shadow-glow-strong hover:-translate-y-0.5 transition-all"
+          >
+            Get {APP_NAME} →
+          </a>
+        </aside>
+
+        {/* Internal linking — boosts SEO + AI crawl coverage */}
+        <RelatedArticles currentSlug={slug} />
+      </article>
+    </>
+  );
+}
+
+async function RelatedArticles({ currentSlug }: { currentSlug: string }) {
+  const { listArticles } = await import("@/lib/content");
+  const all = await listArticles();
+  const related = all.filter(a => a.slug !== currentSlug).slice(0, 4);
+  if (related.length === 0) return null;
+  return (
+    <nav aria-label="Related guides" className="mt-16 pt-12 border-t border-rule">
+      <h2 className="font-mono text-xs tracking-[0.16em] uppercase text-text-soft mb-6">More authentication guides</h2>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {related.map(a => (
+          <Link
+            key={a.slug}
+            href={`/fake-watch-guide/${a.slug}`}
+            className="group block p-5 rounded-xl bg-bg-2 border border-rule hover:border-accent/30 transition-colors"
+          >
+            <div className="font-mono text-[0.65rem] tracking-[0.14em] uppercase text-accent mb-2">
+              {a.brand}
+            </div>
+            <div className="font-serif text-xl leading-tight mb-2">{a.model}</div>
+            <div className="font-mono text-[0.7rem] tracking-wider uppercase text-text-soft">
+              {a.readingMinutes} min · {a.refs[0]} <span className="text-accent group-hover:translate-x-1 inline-block transition-transform">→</span>
+            </div>
+          </Link>
+        ))}
       </div>
-      <h1 className="font-serif text-3xl md:text-4xl leading-tight mb-6">
-        {article.meta.title}
-      </h1>
-
-      <div className="prose-watch" dangerouslySetInnerHTML={{ __html: article.html }} />
-    </article>
+    </nav>
   );
 }

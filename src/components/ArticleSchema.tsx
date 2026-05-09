@@ -1,28 +1,18 @@
-import type { ArticleFrontmatter } from "@/lib/content";
+import { articleSchema, breadcrumbSchema, faqSchema, renderJsonLd, type ArticleMeta } from "@/lib/seo";
 
-const SITE_URL = process.env.SITE_URL ?? "https://fakewatch.guide";
+interface Props {
+  meta: ArticleMeta;
+  faq?: Array<{ q: string; a: string }>;
+}
 
-export function ArticleSchema({ meta }: { meta: ArticleFrontmatter }) {
-  const json = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: meta.title,
-    description: meta.description,
-    datePublished: meta.publishedAt,
-    dateModified: meta.updatedAt,
-    author: { "@type": "Organization", name: "Fake Watch Guide" },
-    publisher: {
-      "@type": "Organization",
-      name: "Fake Watch Guide",
-      url: SITE_URL,
-    },
-    mainEntityOfPage: `${SITE_URL}/fake-watch-guide/${meta.slug}`,
-    about: { "@type": "Product", brand: meta.brand, name: meta.model },
-  };
+/** Emits Article + BreadcrumbList + (optional) FAQPage JSON-LD as one @graph blob. */
+export function ArticleSchema({ meta, faq }: Props) {
+  const nodes: object[] = [articleSchema(meta), breadcrumbSchema(meta)];
+  if (faq && faq.length > 0) nodes.push(faqSchema(faq));
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
+      dangerouslySetInnerHTML={{ __html: renderJsonLd(...nodes) }}
     />
   );
 }
