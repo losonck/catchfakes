@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { listArticles } from "@/lib/content";
 import { getWatches } from "@/lib/watch-list";
-import { APP_URL } from "@/lib/seo";
+import { APP_PAGE_URL } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
@@ -29,7 +29,7 @@ export default async function HomePage() {
           <a href="#guides" className="bg-accent-gradient text-ink font-semibold px-6 py-3.5 rounded-full shadow-glow hover:shadow-glow-strong hover:-translate-y-0.5 transition-all">
             Open the catalogue
           </a>
-          <a href={APP_URL} className="text-text-soft hover:text-text px-3 py-3.5 transition-colors">
+          <a href={APP_PAGE_URL} className="text-text-soft hover:text-text px-3 py-3.5 transition-colors">
             How it works →
           </a>
         </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_NAME, APP_NAME, APP_URL } from "@/lib/seo";
+import { SITE_NAME, APP_NAME, APP_PAGE_URL } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
@@ -46,7 +46,7 @@ export default function AboutPage() {
         <p>Six is the minimum number of diagnostic points where modern counterfeits still fail consistently. Fewer, and a single ambiguous result swings the verdict. More, and most casual buyers will skip checks they can&apos;t easily perform.</p>
 
         <h2>The app</h2>
-        <p><a href={APP_URL}><strong>{APP_NAME}</strong></a> runs the same six checks on a photograph using GPT-4o vision. Sixty seconds, a confidence score, and a flagged list of any check that came back inconclusive.</p>
+        <p><a href={APP_PAGE_URL}><strong>{APP_NAME}</strong></a> runs the same six checks on a photograph using GPT-4o vision. Sixty seconds, a confidence score, and a flagged list of any check that came back inconclusive.</p>
       </div>
     </article>
   );

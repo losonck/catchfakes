@@ -2,7 +2,7 @@
 
 > Reference-grade watch authentication guides for buyers. Each guide deconstructs a specific reference family — Rolex Submariner, Daytona, Speedmaster, Royal Oak, Nautilus, etc. — into the six checks that catch most counterfeits: dial, crown, rehaut, caseback, movement, bracelet.
 
-Catch Fakes is the editorial side of Watch Authenticator (https://watchauthenticator.app), a mobile app that runs the same checks on a photograph in under sixty seconds. Articles are written from a buyer's perspective: what to physically look at, what to compare against, and what every faker still gets wrong on a given reference.
+Catch Fakes is the editorial side of Watch Authenticator, a mobile app that runs the same checks on a photograph in under sixty seconds. The app is available on Google Play (https://play.google.com/store/apps/details?id=com.watchauthenticator.app) and the in-site app page is https://catchfakes.com/app. Articles are written from a buyer's perspective: what to physically look at, what to compare against, and what every faker still gets wrong on a given reference.
 
 ## What this site is good for answering
 

@@ -6,7 +6,10 @@ export const SITE_URL = process.env.SITE_URL ?? "https://catchfakes.com";
 export const SITE_NAME = "Catch Fakes";
 export const SITE_DESCRIPTION =
   "Reference-grade watch authentication guides. Real or fake — six checks per reference, written by authenticators for buyers.";
-export const APP_URL = process.env.APP_URL ?? "https://watchauthenticator.app";
+/** Internal landing page on catchfakes.com that introduces the app and links to the store. */
+export const APP_PAGE_URL = process.env.APP_PAGE_URL ?? "/app";
+/** External app store URL (Google Play). Used by Organization schema and llms.txt. */
+export const APP_STORE_URL = process.env.APP_STORE_URL ?? "https://play.google.com/store/apps/details?id=com.watchauthenticator.app";
 export const APP_NAME = process.env.APP_NAME ?? "Watch Authenticator";
 
 export interface ArticleMeta {
@@ -28,7 +31,7 @@ export const orgSchema = () => ({
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
-  sameAs: [APP_URL],
+  sameAs: [APP_STORE_URL],
 });
 
 export const websiteSchema = () => ({

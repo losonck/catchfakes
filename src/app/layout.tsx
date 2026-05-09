@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, orgSchema, websiteSchema, renderJsonLd } from "@/lib/seo";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, APP_PAGE_URL, orgSchema, websiteSchema, renderJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -75,11 +75,11 @@ function Header() {
         </a>
         <nav className="hidden sm:flex gap-8 text-sm text-text-soft">
           <a href="/" className="hover:text-text transition-colors">Guides</a>
-          <a href={process.env.APP_URL ?? "https://watchauthenticator.app"} className="hover:text-text transition-colors">App</a>
+          <a href={APP_PAGE_URL} className="hover:text-text transition-colors">App</a>
           <a href="/about" className="hover:text-text transition-colors">Method</a>
         </nav>
         <a
-          href={process.env.APP_URL ?? "https://watchauthenticator.app"}
+          href={APP_PAGE_URL}
           className="bg-accent-gradient text-ink font-semibold text-sm px-4 py-2 rounded-full hover:scale-105 transition-transform"
         >
           Get the App
@@ -106,7 +106,7 @@ function Footer() {
         </div>
         <div>
           <h5 className="font-mono text-xs tracking-[0.16em] uppercase text-text-soft mb-3">Product</h5>
-          <a href={process.env.APP_URL ?? "#"} className="block text-sm text-text mb-1 hover:text-accent">Mobile app</a>
+          <a href={APP_PAGE_URL} className="block text-sm text-text mb-1 hover:text-accent">Mobile app</a>
           <a href="/about" className="block text-sm text-text mb-1 hover:text-accent">Method</a>
         </div>
       </div>

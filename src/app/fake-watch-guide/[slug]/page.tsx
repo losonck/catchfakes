@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getArticle, listSlugs } from "@/lib/content";
 import { ArticleSchema } from "@/components/ArticleSchema";
-import { extractFaq, SITE_URL, SITE_NAME, APP_URL, APP_NAME } from "@/lib/seo";
+import { extractFaq, SITE_URL, SITE_NAME, APP_PAGE_URL, APP_NAME } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -107,7 +107,7 @@ export default async function ArticlePage(
             <strong className="text-text">{APP_NAME}</strong> scans a photo and runs the same six checks — dial, crown, rehaut, caseback, movement, bracelet — and flags anything off.
           </p>
           <a
-            href={APP_URL}
+            href={APP_PAGE_URL}
             className="inline-flex bg-accent-gradient text-ink font-semibold px-5 py-3 rounded-full shadow-glow hover:shadow-glow-strong hover:-translate-y-0.5 transition-all"
           >
             Get {APP_NAME} →
