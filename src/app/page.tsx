@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { listArticles } from "@/lib/content";
+import { listArticles, articleCardImagePath } from "@/lib/content";
 import { getWatches } from "@/lib/watch-list";
 import { APP_PAGE_URL } from "@/lib/seo";
 
@@ -61,7 +61,7 @@ export default async function HomePage() {
               <div className="flex flex-col gap-4">
                 <div className="flex-1 rounded-lg overflow-hidden relative bg-bg">
                   <img
-                    src="/articles/rolex-submariner.jpg"
+                    src="/articles/rolex-submariner-v1.jpg"
                     alt="Watch under authentication"
                     width={1200}
                     height={630}
@@ -124,7 +124,7 @@ export default async function HomePage() {
               >
                 <div className="aspect-[16/10] rounded-xl mb-2 relative overflow-hidden bg-bg-2">
                   <img
-                    src={`/articles/${a.slug}.jpg`}
+                    src={articleCardImagePath(a.slug)}
                     alt={`${a.brand} ${a.model}`}
                     width={1200}
                     height={630}

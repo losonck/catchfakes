@@ -117,7 +117,7 @@ export default function AppPage() {
               <div className="flex flex-col gap-4">
                 <div className="flex-1 rounded-lg overflow-hidden relative bg-bg">
                   <img
-                    src="/articles/rolex-submariner.jpg"
+                    src="/articles/rolex-submariner-v1.jpg"
                     alt="Watch under authentication"
                     width={1200}
                     height={630}

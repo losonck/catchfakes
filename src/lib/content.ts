@@ -18,9 +18,14 @@ export interface ArticleFrontmatter {
   readingMinutes: number;
 }
 
-/** Path to the article's hero image (also used as per-article OG image). */
+/** Hero image used on the article page itself + per-article OG image. */
 export function articleImagePath(slug: string): string {
-  return `/articles/${slug}.jpg`;
+  return `/articles/${slug}-v2.jpg`;
+}
+
+/** Smaller card image used on the homepage grid (visually distinct from the article hero). */
+export function articleCardImagePath(slug: string): string {
+  return `/articles/${slug}-v1.jpg`;
 }
 
 export interface Article {
