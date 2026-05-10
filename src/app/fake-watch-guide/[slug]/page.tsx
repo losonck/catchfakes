@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getArticle, listSlugs, articleImagePath } from "@/lib/content";
+import { getArticle, listSlugs, articleImagePath, getPhotoAttribution } from "@/lib/content";
 import { ArticleSchema } from "@/components/ArticleSchema";
 import { extractFaq, SITE_URL, SITE_NAME, APP_PAGE_URL, APP_NAME } from "@/lib/seo";
 
@@ -85,15 +85,29 @@ export default async function ArticlePage(
             {article.meta.title}
           </h1>
           <p className="text-xl text-text-soft leading-relaxed mb-8">{article.meta.description}</p>
-          <figure className="-mx-4 sm:-mx-6 mb-8 rounded-2xl overflow-hidden border border-rule">
-            <img
-              src={articleImagePath(slug)}
-              alt={`${article.meta.brand} ${article.meta.model}`}
-              width={1200}
-              height={630}
-              className="w-full h-auto block"
-              fetchPriority="high"
-            />
+          <figure className="-mx-4 sm:-mx-6 mb-8">
+            <div className="rounded-2xl overflow-hidden border border-rule">
+              <img
+                src={articleImagePath(slug)}
+                alt={`${article.meta.brand} ${article.meta.model}`}
+                width={1200}
+                height={630}
+                className="w-full h-auto block"
+                fetchPriority="high"
+              />
+            </div>
+            {(() => {
+              const attr = getPhotoAttribution(slug);
+              if (!attr) return null;
+              return (
+                <figcaption className="mt-2 px-4 sm:px-6 font-mono text-[0.7rem] tracking-wider text-text-soft">
+                  Photo: {attr.photographer} · {attr.license}
+                  {attr.source_page && (
+                    <> · <a href={attr.source_page} target="_blank" rel="noopener" className="text-accent hover:underline">source</a></>
+                  )}
+                </figcaption>
+              );
+            })()}
           </figure>
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider uppercase text-text-soft pt-6 border-t border-rule">
             <span>By <span className="text-text">{SITE_NAME} Authentication Desk</span></span>

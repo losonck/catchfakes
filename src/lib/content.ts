@@ -1,8 +1,31 @@
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
 import path from "node:path";
 import { marked } from "marked";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
+
+export interface PhotoAttribution {
+  photographer: string;
+  license: string;
+  license_url?: string;
+  source_page?: string;
+}
+
+let _attribution: Record<string, { v1?: PhotoAttribution; v2?: PhotoAttribution }> | null = null;
+
+/** Returns photo attribution for a slug's article-hero variant (v2), or null if AI-generated. */
+export function getPhotoAttribution(slug: string): PhotoAttribution | null {
+  if (_attribution === null) {
+    const p = path.join(process.cwd(), "data", "photo-attribution.json");
+    try {
+      _attribution = JSON.parse(fsSync.readFileSync(p, "utf-8"));
+    } catch {
+      _attribution = {};
+    }
+  }
+  return _attribution?.[slug]?.v2 ?? null;
+}
 
 marked.setOptions({ gfm: true, breaks: false });
 
