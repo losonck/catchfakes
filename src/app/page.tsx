@@ -59,23 +59,19 @@ export default async function HomePage() {
                 ))}
               </div>
               <div className="flex flex-col gap-4">
-                <div
-                  className="flex-1 rounded-lg overflow-hidden relative"
-                  style={{ background: "radial-gradient(circle at 30% 30%, #4a4438, #14110d 70%), #0B0B0F" }}
-                >
-                  <div
-                    className="absolute rounded-full"
-                    style={{
-                      inset: "25%",
-                      background: "radial-gradient(circle at 35% 30%, #6a604f, #1c1916 70%)",
-                      boxShadow: "0 30px 60px rgba(0,0,0,.6)",
-                    }}
+                <div className="flex-1 rounded-lg overflow-hidden relative bg-bg">
+                  <img
+                    src="/articles/rolex-submariner.jpg"
+                    alt="Watch under authentication"
+                    width={1200}
+                    height={630}
+                    className="w-full h-full object-cover"
+                    fetchPriority="high"
                   />
                   <div
-                    className="absolute border-2 rounded-full"
+                    className="absolute border-2 border-signal rounded-full pointer-events-none"
                     style={{
                       top: "32%", right: "28%", width: "14%", height: "14%",
-                      borderColor: "var(--signal, #5DE0E6)",
                       boxShadow: "0 0 20px rgba(93,224,230,.5)",
                     }}
                   />
