@@ -4,7 +4,7 @@ Saves to public/articles-test/{slug}-v{n}.jpg
 """
 import csv, os, sys, base64
 from io import BytesIO
-from PIL import Image
+from PIL import Image, ImageOps
 from google import genai
 from google.genai import types
 
@@ -49,7 +49,9 @@ for r in rows:
                     raw = part.inline_data.data
                     if isinstance(raw, str):
                         raw = base64.b64decode(raw)
-                    img = Image.open(BytesIO(raw)).convert("RGB").resize((1200, 630), Image.LANCZOS)
+                    img = Image.open(BytesIO(raw)).convert("RGB")
+                    # Aspect-preserving center-crop to 1200x630 (no stretching)
+                    img = ImageOps.fit(img, (1200, 630), method=Image.LANCZOS, centering=(0.5, 0.5))
                     img.save(out, "JPEG", quality=88, optimize=True)
                     print(f"        wrote {out} ({os.path.getsize(out):,} bytes)")
                     saved = True
