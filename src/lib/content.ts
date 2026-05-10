@@ -41,14 +41,17 @@ export interface ArticleFrontmatter {
   readingMinutes: number;
 }
 
+/** Cache-busting suffix — bump when image batch is regenerated to force browsers to refetch. */
+const IMG_VERSION = "wm1";
+
 /** Hero image used on the article page itself + per-article OG image. */
 export function articleImagePath(slug: string): string {
-  return `/articles/${slug}-v2.jpg`;
+  return `/articles/${slug}-v2.jpg?v=${IMG_VERSION}`;
 }
 
 /** Smaller card image used on the homepage grid (visually distinct from the article hero). */
 export function articleCardImagePath(slug: string): string {
-  return `/articles/${slug}-v1.jpg`;
+  return `/articles/${slug}-v1.jpg?v=${IMG_VERSION}`;
 }
 
 export interface Article {
