@@ -67,13 +67,13 @@ export default function TestImagesPage() {
                   <div className="font-mono text-[0.7rem] tracking-[0.16em] uppercase text-accent mb-2">
                     {v.toUpperCase()} — {v === "v1" ? t.v1Note : t.v2Note}
                   </div>
-                  <figure className="rounded-2xl overflow-hidden border border-rule bg-bg-2">
+                  <figure className="rounded-2xl overflow-hidden border border-rule bg-bg-2 aspect-[1200/630]">
                     <img
-                      src={`/articles-test/${t.slug}-${v}.jpg`}
+                      src={`/articles-test/${t.slug}-${v}.jpg?v=2`}
                       alt={`${t.name} ${v}`}
                       width={1200}
                       height={630}
-                      className="w-full h-auto block"
+                      className="w-full h-full object-contain block"
                       loading="lazy"
                     />
                   </figure>
