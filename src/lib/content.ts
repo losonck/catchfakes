@@ -18,6 +18,11 @@ export interface ArticleFrontmatter {
   readingMinutes: number;
 }
 
+/** Path to the article's hero image (also used as per-article OG image). */
+export function articleImagePath(slug: string): string {
+  return `/articles/${slug}.jpg`;
+}
+
 export interface Article {
   meta: ArticleFrontmatter;
   html: string;

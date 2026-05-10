@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getArticle, listSlugs } from "@/lib/content";
+import { getArticle, listSlugs, articleImagePath } from "@/lib/content";
 import { ArticleSchema } from "@/components/ArticleSchema";
 import { extractFaq, SITE_URL, SITE_NAME, APP_PAGE_URL, APP_NAME } from "@/lib/seo";
 
@@ -39,13 +39,13 @@ export async function generateMetadata(
         "watch authentication",
         `fake ${article.meta.brand}`,
       ],
-      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: article.meta.title }],
+      images: [{ url: articleImagePath(slug), width: 1200, height: 630, alt: article.meta.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: article.meta.title,
       description: article.meta.description,
-      images: ["/og.jpg"],
+      images: [articleImagePath(slug)],
     },
     keywords: [
       `fake ${article.meta.brand} ${article.meta.model}`,
@@ -84,7 +84,17 @@ export default async function ArticlePage(
           <h1 className="font-serif text-[clamp(2.4rem,5vw,4rem)] leading-[1.05] tracking-[-0.02em] mb-6">
             {article.meta.title}
           </h1>
-          <p className="text-xl text-text-soft leading-relaxed mb-6">{article.meta.description}</p>
+          <p className="text-xl text-text-soft leading-relaxed mb-8">{article.meta.description}</p>
+          <figure className="-mx-4 sm:-mx-6 mb-8 rounded-2xl overflow-hidden border border-rule">
+            <img
+              src={articleImagePath(slug)}
+              alt={`${article.meta.brand} ${article.meta.model}`}
+              width={1200}
+              height={630}
+              className="w-full h-auto block"
+              fetchPriority="high"
+            />
+          </figure>
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs tracking-wider uppercase text-text-soft pt-6 border-t border-rule">
             <span>By <span className="text-text">{SITE_NAME} Authentication Desk</span></span>
             <span>{article.meta.readingMinutes} min read</span>

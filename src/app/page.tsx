@@ -126,17 +126,14 @@ export default async function HomePage() {
                 href={`/fake-watch-guide/${a.slug}`}
                 className="group bg-gradient-to-b from-bg-2 to-bg border border-rule rounded-2xl p-6 transition-all hover:-translate-y-1 hover:border-accent/30 hover:shadow-2xl flex flex-col gap-3"
               >
-                <div
-                  className="aspect-[16/10] rounded-xl mb-2 relative overflow-hidden"
-                  style={{ background: "radial-gradient(circle at 50% 60%, rgba(212,169,90,.15), transparent 60%), linear-gradient(135deg, #1C1C25, #14141B)" }}
-                >
-                  <div
-                    className="absolute rounded-full"
-                    style={{
-                      inset: "25%",
-                      background: "radial-gradient(circle at 35% 30%, #5a544d, #1a1714 70%)",
-                      boxShadow: "0 12px 28px rgba(0,0,0,.5)",
-                    }}
+                <div className="aspect-[16/10] rounded-xl mb-2 relative overflow-hidden bg-bg-2">
+                  <img
+                    src={`/articles/${a.slug}.jpg`}
+                    alt={`${a.brand} ${a.model}`}
+                    width={1200}
+                    height={630}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                 </div>
                 <div className="font-mono text-[0.7rem] tracking-[0.12em] uppercase text-accent">
