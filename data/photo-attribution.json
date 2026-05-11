@@ -264,5 +264,89 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
       "source_page": "https://commons.wikimedia.org/wiki/File:Tudor_Pelagos_for_Carolina_Watch_Club_on_Wrist.jpg"
     }
+  },
+  "iwc-portugieser": {
+    "v1": {
+      "photographer": "Johnson Watch Co",
+      "license": "pdm 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source_page": "https://www.flickr.com/photos/150219019@N03/40963228565"
+    },
+    "v2": {
+      "photographer": "Rolf Dietrich Brecher",
+      "license": "by 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://www.flickr.com/photos/104249543@N07/46597728654"
+    }
+  },
+  "vacheron-overseas": {
+    "v1": {
+      "photographer": "Johnson Watch Co",
+      "license": "pdm 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source_page": "https://www.flickr.com/photos/150219019@N03/35584599236"
+    },
+    "v2": {
+      "photographer": "Johnson Watch Co",
+      "license": "pdm 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source_page": "https://www.flickr.com/photos/150219019@N03/36656428173"
+    }
+  },
+  "rolex-submariner-vintage": {
+    "v1": {
+      "photographer": "section215",
+      "license": "by 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://www.flickr.com/photos/25646902@N00/15646852533"
+    },
+    "v2": {
+      "photographer": "Good_Timing",
+      "license": "by 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://www.flickr.com/photos/134972809@N05/21636333799"
+    }
+  },
+  "omega-constellation": {
+    "v1": {
+      "photographer": "rprata",
+      "license": "by-sa 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "source_page": "https://www.flickr.com/photos/15156805@N00/4125840851"
+    },
+    "v2": {
+      "photographer": "JingKe888",
+      "license": "by 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://www.flickr.com/photos/96214671@N08/50065865131"
+    }
+  },
+  "tudor-black-bay-pro": {
+    "v1": {
+      "photographer": "David Blaikie",
+      "license": "by 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://www.flickr.com/photos/12568962@N00/52441038521"
+    },
+    "v2": {
+      "photographer": "David Blaikie",
+      "license": "by 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0/",
+      "source_page": "https://www.flickr.com/photos/12568962@N00/52441038521"
+    }
+  },
+  "hublot-big-bang": {
+    "v1": {
+      "photographer": "Johnson Watch Co",
+      "license": "pdm 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source_page": "https://www.flickr.com/photos/150219019@N03/34366009102"
+    },
+    "v2": {
+      "photographer": "Johnson Watch Co",
+      "license": "pdm 1.0",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "source_page": "https://www.flickr.com/photos/150219019@N03/34365995572"
+    }
   }
 }
