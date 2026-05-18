@@ -348,5 +348,103 @@
       "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
       "source_page": "https://www.flickr.com/photos/150219019@N03/34365995572"
     }
+  },
+  "rolex-submariner": {
+    "v1": {
+      "photographer": "Pratik Prasad",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/14778525/"
+    },
+    "v2": {
+      "photographer": "Quang Viet Nguyen",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/9561302/"
+    }
+  },
+  "omega-seamaster-300": {
+    "v1": {
+      "photographer": "Bhop Phikanesuan",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/12437149/"
+    },
+    "v2": {
+      "photographer": "Bhop Phikanesuan",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/12437153/"
+    }
+  },
+  "tudor-black-bay-58": {
+    "v1": {
+      "photographer": "Quang Viet Nguyen",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/9561293/"
+    },
+    "v2": {
+      "photographer": "Atelier Kommpass",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/32968007/"
+    }
+  },
+  "grand-seiko-snowflake": {
+    "v1": {
+      "photographer": "Videas",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/28892771/"
+    },
+    "v2": {
+      "photographer": "Atelier Kommpass",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/34911666/"
+    }
+  },
+  "omega-aqua-terra": {
+    "v1": {
+      "photographer": "Bimql69",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/14312717/"
+    },
+    "v2": {
+      "photographer": "Quang Viet Nguyen",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/9561298/"
+    }
+  },
+  "ap-royal-oak-offshore": {
+    "v1": {
+      "photographer": "Loquellano",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/8892886/"
+    },
+    "v2": {
+      "photographer": "Loquellano",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/8892886/"
+    }
+  },
+  "ap-code-1159": {
+    "v1": {
+      "photographer": "Sean Shirzadi",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/4431871/"
+    },
+    "v2": {
+      "photographer": "Sean Shirzadi",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "source_page": "https://www.pexels.com/photo/4431871/"
+    }
   }
 }

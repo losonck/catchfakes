@@ -42,7 +42,7 @@ export interface ArticleFrontmatter {
 }
 
 /** Cache-busting suffix — bump when image batch is regenerated to force browsers to refetch. */
-const IMG_VERSION = "wm2";
+const IMG_VERSION = "wm3";
 
 /** Hero image used on the article page itself + per-article OG image. */
 export function articleImagePath(slug: string): string {
