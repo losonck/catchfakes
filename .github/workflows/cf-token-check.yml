@@ -2,6 +2,9 @@ name: Cloudflare token check
 
 on:
   workflow_dispatch:
+  push:
+    branches: [claude/cloudflare-website-setup-I3JVi]
+    paths: [.github/workflows/cf-token-check.yml]
 
 jobs:
   verify:
