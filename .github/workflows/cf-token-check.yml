@@ -1,0 +1,55 @@
+name: Cloudflare token check
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify token
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${CF_TOKEN:-}" ]; then
+            echo "::error::CLOUDFLARE_API_TOKEN secret is not set"
+            exit 1
+          fi
+
+          echo "== /user/tokens/verify =="
+          verify=$(curl -sS -o /tmp/verify.json -w "%{http_code}" \
+            -H "Authorization: Bearer $CF_TOKEN" \
+            -H "Content-Type: application/json" \
+            https://api.cloudflare.com/client/v4/user/tokens/verify)
+          echo "HTTP $verify"
+          jq '.' /tmp/verify.json
+
+          ok=$(jq -r '.success' /tmp/verify.json)
+          status=$(jq -r '.result.status // empty' /tmp/verify.json)
+          if [ "$ok" != "true" ] || [ "$status" != "active" ]; then
+            echo "::error::Token is not active"
+            exit 1
+          fi
+
+          if [ -n "${CF_ACCOUNT:-}" ]; then
+            echo "== /accounts/$CF_ACCOUNT =="
+            curl -sS -o /tmp/acct.json -w "HTTP %{http_code}\n" \
+              -H "Authorization: Bearer $CF_TOKEN" \
+              https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT
+            jq '{success, errors, name: .result.name, id: .result.id}' /tmp/acct.json
+          else
+            echo "CLOUDFLARE_ACCOUNT_ID not set — listing accounts the token can see:"
+            curl -sS -H "Authorization: Bearer $CF_TOKEN" \
+              https://api.cloudflare.com/client/v4/accounts \
+              | jq '{success, errors, accounts: [.result[] | {id, name}]}'
+          fi
+
+          echo "== zones visible to this token =="
+          curl -sS -H "Authorization: Bearer $CF_TOKEN" \
+            https://api.cloudflare.com/client/v4/zones \
+            | jq '{success, count: (.result | length), zones: [.result[] | {name, id, status}]}'
+
+          echo "Token OK"
