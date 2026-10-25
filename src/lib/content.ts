@@ -90,3 +90,56 @@ export async function listArticles(): Promise<ArticleFrontmatter[]> {
     .map(a => a.meta)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export function extractFaq(raw: string): FaqItem[] {
+  const lines = raw.split(/\r?\n/);
+  const faqs: FaqItem[] = [];
+  let inFaq = false;
+  let current: FaqItem | null = null;
+  const answerBuf: string[] = [];
+
+  const flush = () => {
+    if (current) {
+      const answer = answerBuf.join("\n").trim();
+      if (answer) faqs.push({ question: current.question, answer });
+    }
+    current = null;
+    answerBuf.length = 0;
+  };
+
+  for (const line of lines) {
+    if (/^##\s+FAQ\s*$/i.test(line)) { inFaq = true; continue; }
+    if (!inFaq) continue;
+    if (/^##\s+/.test(line) && !/^##\s+FAQ/i.test(line)) {
+      flush();
+      inFaq = false;
+      continue;
+    }
+    const q = line.match(/^###\s+(.+?)\s*$/);
+    if (q) {
+      flush();
+      current = { question: q[1], answer: "" };
+      continue;
+    }
+    if (current) answerBuf.push(line);
+  }
+  flush();
+  return faqs;
+}
+
+export async function getRelatedArticles(
+  slug: string,
+  limit = 4,
+): Promise<ArticleFrontmatter[]> {
+  const all = await listArticles();
+  const self = all.find(a => a.slug === slug);
+  if (!self) return all.slice(0, limit);
+  const sameBrand = all.filter(a => a.slug !== slug && a.brand === self.brand);
+  const others = all.filter(a => a.slug !== slug && a.brand !== self.brand);
+  return [...sameBrand, ...others].slice(0, limit);
+}

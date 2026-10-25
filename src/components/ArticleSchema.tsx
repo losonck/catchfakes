@@ -1,9 +1,15 @@
-import type { ArticleFrontmatter } from "@/lib/content";
+import type { ArticleFrontmatter, FaqItem } from "@/lib/content";
 
-const SITE_URL = process.env.SITE_URL ?? "https://fakewatch.guide";
+const SITE_URL = process.env.SITE_URL ?? "https://catchfakes.com";
 
-export function ArticleSchema({ meta }: { meta: ArticleFrontmatter }) {
-  const json = {
+export function ArticleSchema({
+  meta,
+  faqs,
+}: {
+  meta: ArticleFrontmatter;
+  faqs?: FaqItem[];
+}) {
+  const article = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: meta.title,
@@ -19,10 +25,32 @@ export function ArticleSchema({ meta }: { meta: ArticleFrontmatter }) {
     mainEntityOfPage: `${SITE_URL}/fake-watch-guide/${meta.slug}`,
     about: { "@type": "Product", brand: meta.brand, name: meta.model },
   };
+
+  const faqSchema =
+    faqs && faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map(f => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }
+      : null;
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+    </>
   );
 }

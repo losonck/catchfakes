@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.SITE_URL ?? "https://fakewatch.guide";
+const SITE_URL = process.env.SITE_URL ?? "https://catchfakes.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {

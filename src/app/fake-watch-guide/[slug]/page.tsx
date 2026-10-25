@@ -1,7 +1,14 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getArticle, listSlugs } from "@/lib/content";
+import {
+  getArticle,
+  listSlugs,
+  extractFaq,
+  getRelatedArticles,
+} from "@/lib/content";
 import { ArticleSchema } from "@/components/ArticleSchema";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedArticles } from "@/components/RelatedArticles";
 
 export const dynamicParams = false;
 
@@ -37,9 +44,19 @@ export default async function ArticlePage(
   const article = await getArticle(slug);
   if (!article) notFound();
 
+  const faqs = extractFaq(article.raw);
+  const related = await getRelatedArticles(slug, 4);
+
   return (
     <article className="max-w-3xl mx-auto px-6 py-12">
-      <ArticleSchema meta={article.meta} />
+      <ArticleSchema meta={article.meta} faqs={faqs} />
+      <Breadcrumbs
+        items={[
+          { name: "Home", href: "/" },
+          { name: article.meta.brand },
+          { name: article.meta.model },
+        ]}
+      />
 
       <div className="text-sm text-muted mb-3">
         {article.meta.brand} · {article.meta.refs.join(", ")} · {article.meta.readingMinutes} min read
@@ -49,6 +66,8 @@ export default async function ArticlePage(
       </h1>
 
       <div className="prose-watch" dangerouslySetInnerHTML={{ __html: article.html }} />
+
+      <RelatedArticles articles={related} />
     </article>
   );
 }

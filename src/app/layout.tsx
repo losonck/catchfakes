@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const SITE_URL = process.env.SITE_URL ?? "https://fakewatch.guide";
+const SITE_URL = process.env.SITE_URL ?? "https://catchfakes.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
