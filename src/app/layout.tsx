@@ -20,8 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="/" className="font-serif text-xl tracking-tight">
               Fake Watch <span className="text-accent">Guide</span>
             </a>
-            <nav className="text-sm">
+            <nav className="text-sm flex gap-5">
               <a href="/" className="hover:text-accent">All guides</a>
+              <a href="/glossary" className="hover:text-accent">Glossary</a>
             </nav>
           </div>
         </header>
