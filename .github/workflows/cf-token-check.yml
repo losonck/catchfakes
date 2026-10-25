@@ -1,4 +1,5 @@
 name: Cloudflare token check
+# re-run
 
 on:
   workflow_dispatch:
