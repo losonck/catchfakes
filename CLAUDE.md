@@ -34,7 +34,7 @@ Next.js 16 + Tailwind static site. 40 long-form "How to spot a fake [model]" aut
 - ✅ App link wired correctly:
   - `/app` landing page with hero device + 6-feature grid + Play Store CTA
   - Header pill, footer, article CTA cards all → `/app`
-  - **AppStoreButton** client component does device detection: Android→Play Store, iOS→"coming soon"+/app, Desktop→/app
+  - **AppStoreButton** client component does device detection: Android→Play Store, iOS→App Store, Desktop→/app
   - Play Store URL: `https://play.google.com/store/apps/details?id=com.watchauthenticator.app`
 - ✅ Full SEO: per-page OG + Twitter Cards + canonical + 11 JSON-LD schema types (Article, Product, Brand, BreadcrumbList, FAQPage, etc.)
 - ✅ AI search: `/llms.txt` for ChatGPT/Perplexity/Claude crawlers
@@ -53,11 +53,9 @@ Next.js 16 + Tailwind static site. 40 long-form "How to spot a fake [model]" aut
 These can be deleted at any time — only useful if revisiting image decisions.
 
 ### Pending Karl decisions / TODOs
-- ⚠️ **Rotate Gemini API key** — Karl pasted `AIzaSyB7dBKcv0u7pFBOnmmadub4-85N7dhYB-o` in chat, billing-enabled. Anyone with chat history can spend on it. Rotate at https://aistudio.google.com/apikey
 - 🔜 **Press pitches** — Hodinkee, Worn & Wound, A Blog to Watch. Not yet started.
 - 🔜 **Reddit bot revival** — code complete in `C:\Users\Karl\watch-reddit-bot`, parked pending Webshare residential proxy decision (free tier, 1GB/mo).
-- 🔜 **iOS app** — when shipped, set `NEXT_PUBLIC_APP_STORE_URL_IOS` in Cloudflare env vars + redeploy. AppStoreButton auto-routes the moment it's set. No code change needed.
-- 🔜 **Smart App Banner** (`<meta name="apple-itunes-app" content="app-id=XXXX">`) — adds native iOS install banner. Trivial to add once iOS App Store ID exists.
+- ✅ **iOS app live** (2026-11-08): `https://apps.apple.com/app/id6768117361` is the default for `APP_STORE_URL_IOS` in lib/seo.ts (env var overrides). Smart App Banner meta in layout.tsx derives the ID from it.
 
 ---
 
