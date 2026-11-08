@@ -12,7 +12,10 @@ export const APP_PAGE_URL = process.env.APP_PAGE_URL ?? "/app";
 export const APP_STORE_URL_ANDROID =
   process.env.NEXT_PUBLIC_APP_STORE_URL_ANDROID ??
   "https://play.google.com/store/apps/details?id=com.watchauthenticator.app";
-export const APP_STORE_URL_IOS = process.env.NEXT_PUBLIC_APP_STORE_URL_IOS ?? "";
+export const APP_STORE_URL_IOS =
+  process.env.NEXT_PUBLIC_APP_STORE_URL_IOS || "https://apps.apple.com/app/id6768117361";
+/** Numeric App Store ID — drives the Safari Smart App Banner. */
+export const APP_STORE_ID_IOS = APP_STORE_URL_IOS.match(/id(\d+)/)?.[1] ?? "";
 /** Backwards-compat alias used by Organization schema sameAs. */
 export const APP_STORE_URL = APP_STORE_URL_ANDROID;
 export const APP_NAME = process.env.APP_NAME ?? "Watch Authenticator";

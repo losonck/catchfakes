@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, APP_PAGE_URL, orgSchema, websiteSchema, renderJsonLd } from "@/lib/seo";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, APP_PAGE_URL, APP_STORE_ID_IOS, orgSchema, websiteSchema, renderJsonLd } from "@/lib/seo";
 import { AppStoreButton } from "@/components/AppStoreButton";
 
 export const metadata: Metadata = {
@@ -54,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
+        {APP_STORE_ID_IOS && <meta name="apple-itunes-app" content={`app-id=${APP_STORE_ID_IOS}`} />}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: renderJsonLd(orgSchema(), websiteSchema()) }}
